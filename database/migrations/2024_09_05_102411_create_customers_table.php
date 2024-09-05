@@ -12,10 +12,10 @@ return new class extends Migration {
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('name');
             $table->string('address');
             $table->decimal('salary', 10, 2);
-            $table->timestamps();
         });
     }
 

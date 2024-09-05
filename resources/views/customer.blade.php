@@ -9,5 +9,12 @@
 <body>
 <h1>Customer Management</h1>
 
+<form>
+    <input type="text" placeholder="Name"><br/>
+    <input type="text" placeholder="Address"><br/>
+    <input type="text" placeholder="Salary"><br/>
+    <button>Save</button>
+</form>
+
 </body>
 </html>
