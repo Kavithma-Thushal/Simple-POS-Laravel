@@ -8,6 +8,6 @@ class ItemController extends Controller
 {
     public function itemManagement()
     {
-        return view('itemManagement');
+        return view('item');
     }
 }
