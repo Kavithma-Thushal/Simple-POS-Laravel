@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,3 +13,5 @@ Route::get('/customerRoute', function () {
 });
 
 Route::get('/itemRoute', [ItemController::class, 'itemManagement']);
+
+Route::get('/orderRoute', [OrderController::class, 'orderManagement'])->name('placeOrder');

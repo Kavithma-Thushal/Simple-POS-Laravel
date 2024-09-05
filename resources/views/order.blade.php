@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simple POS</title>
+    <title>Order Management</title>
 </head>
 
 <body>
-<h1>Simple POS</h1>
-
-<a href="{{route('placeOrder')}}" target="_blank">
-    <button>Place Order</button>
-</a>
+<h1>Order Management</h1>
 
 </body>
 </html>
