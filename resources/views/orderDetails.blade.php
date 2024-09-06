@@ -1,4 +1,4 @@
-<section id="orderDetailsSection">
+<main id="orderDetailsSection">
     <h1 class="text-center fw-bold mt-4">Order Details</h1>
 
     <div class="row justify-content-center">
@@ -17,4 +17,4 @@
             </table>
         </div>
     </div>
-</section>
+</main>

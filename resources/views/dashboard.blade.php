@@ -69,36 +69,34 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
-    $(document).ready(function () {
-        function loadContent(route) {
-            $.ajax({
-                url: route,
-                type: 'GET',
-                success: function (data) {
-                    $('#dashboardSection').html(data);
-                }
-            });
-        }
-
-        $('#customerLink').on('click', function (e) {
-            e.preventDefault();
-            loadContent("{{ route('customer-management') }}");
+    function loadContent(route) {
+        $.ajax({
+            url: route,
+            type: 'GET',
+            success: function (data) {
+                $('#dashboardSection').html(data);
+            }
         });
+    }
 
-        $('#itemLink').on('click', function (e) {
-            e.preventDefault();
-            loadContent("{{ route('item-management') }}");
-        });
+    $('#customerLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('customer-management') }}");
+    });
 
-        $('#placeOrderLink').on('click', function (e) {
-            e.preventDefault();
-            loadContent("{{ route('place-order-management') }}");
-        });
+    $('#itemLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('item-management') }}");
+    });
 
-        $('#orderDetailsLink').on('click', function (e) {
-            e.preventDefault();
-            loadContent("{{ route('order-details-management') }}");
-        });
+    $('#placeOrderLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('place-order-management') }}");
+    });
+
+    $('#orderDetailsLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('order-details-management') }}");
     });
 </script>
 </body>

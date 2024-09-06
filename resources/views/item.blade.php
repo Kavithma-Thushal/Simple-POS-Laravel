@@ -1,4 +1,4 @@
-<section id="itemSection">
+<main id="itemSection">
     <h1 class="text-center fw-bold m-4">Item Management</h1>
 
     <div class="row">
@@ -69,4 +69,4 @@
         </div>
 
     </div>
-</section>
+</main>

@@ -1,4 +1,4 @@
-<section id="customerSection">
+<main id="customerSection">
     <h1 class="text-center fw-bold m-4">Customer Management</h1>
 
     <div class="row">
@@ -72,4 +72,4 @@
         </div>
 
     </div>
-</section>
+</main>
