@@ -14,24 +14,24 @@
         <div class="navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('customer') }}" target="_blank">Customer</a>
+                    <a class="nav-link" href="#" id="customerLink">Customer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('item') }}" target="_blank">Item</a>
+                    <a class="nav-link" href="#" id="itemLink">Item</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('placeOrder') }}" target="_blank">Place Order</a>
+                    <a class="nav-link" href="#" id="placeOrderLink">Place Order</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('orderDetails') }}" target="_blank">Order Details</a>
+                    <a class="nav-link" href="#" id="orderDetailsLink">Order Details</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Dashboard -->
-<section id="dashboardSection" class="container-fluid my-5">
+<!-- Main Content -->
+<section id="mainContent" class="container-fluid my-5">
 
     <div class="d-flex justify-content-center">
 
@@ -67,5 +67,39 @@
     </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+    $(document).ready(function () {
+        function loadContent(route) {
+            $.ajax({
+                url: route,
+                type: 'GET',
+                success: function (data) {
+                    $('#mainContent').html(data);
+                }
+            });
+        }
+
+        $('#customerLink').on('click', function (e) {
+            e.preventDefault();
+            loadContent("{{ route('customer') }}");
+        });
+
+        $('#itemLink').on('click', function (e) {
+            e.preventDefault();
+            loadContent("{{ route('item') }}");
+        });
+
+        $('#placeOrderLink').on('click', function (e) {
+            e.preventDefault();
+            loadContent("{{ route('placeOrder') }}");
+        });
+
+        $('#orderDetailsLink').on('click', function (e) {
+            e.preventDefault();
+            loadContent("{{ route('orderDetails') }}");
+        });
+    });
+</script>
 </body>
 </html>
