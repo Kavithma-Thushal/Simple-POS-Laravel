@@ -82,22 +82,22 @@
 
         $('#customerLink').on('click', function (e) {
             e.preventDefault();
-            loadContent("{{ route('customer') }}");
+            loadContent("{{ route('customer-management') }}");
         });
 
         $('#itemLink').on('click', function (e) {
             e.preventDefault();
-            loadContent("{{ route('item') }}");
+            loadContent("{{ route('item-management') }}");
         });
 
         $('#placeOrderLink').on('click', function (e) {
             e.preventDefault();
-            loadContent("{{ route('placeOrder') }}");
+            loadContent("{{ route('place-order-management') }}");
         });
 
         $('#orderDetailsLink').on('click', function (e) {
             e.preventDefault();
-            loadContent("{{ route('orderDetails') }}");
+            loadContent("{{ route('order-details-management') }}");
         });
     });
 </script>
