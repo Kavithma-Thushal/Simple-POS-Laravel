@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 class PlaceOrderController extends Controller
 {
-    public function placeOrderManagement()
+    public function getPlaceOrderView()
     {
         return view('placeOrder');
     }

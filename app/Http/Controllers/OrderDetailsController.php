@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 class OrderDetailsController extends Controller
 {
-    public function orderDetailsManagement()
+    public function getOrderDetailsView()
     {
         return view('orderDetails');
     }

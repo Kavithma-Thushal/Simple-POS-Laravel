@@ -10,10 +10,10 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('/customer-route', [CustomerController::class, 'customerManagement'])->name('customer-management');
+Route::get('/customer-route', [CustomerController::class, 'getCustomerView'])->name('customer-management');
 
-Route::get('/item-route', [ItemController::class, 'itemManagement'])->name('item-management');
+Route::get('/item-route', [ItemController::class, 'getItemView'])->name('item-management');
 
-Route::get('/placer-order-route', [PlaceOrderController::class, 'placeOrderManagement'])->name('place-order-management');
+Route::get('/placer-order-route', [PlaceOrderController::class, 'getPlaceOrderView'])->name('place-order-management');
 
-Route::get('/order-details-route', [OrderDetailsController::class, 'orderDetailsManagement'])->name('order-details-management');
+Route::get('/order-details-route', [OrderDetailsController::class, 'getOrderDetailsView'])->name('order-details-management');

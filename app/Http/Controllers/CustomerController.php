@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 class CustomerController extends Controller
 {
-    public function customerManagement()
+    public function getCustomerView()
     {
         return view('customer');
     }

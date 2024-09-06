@@ -30,8 +30,8 @@
     </div>
 </nav>
 
-<!-- Main Content -->
-<section id="mainContent" class="container-fluid my-5">
+<!-- Dashboard -->
+<section id="dashboardSection" class="container-fluid my-5">
 
     <div class="d-flex justify-content-center">
 
@@ -75,7 +75,7 @@
                 url: route,
                 type: 'GET',
                 success: function (data) {
-                    $('#mainContent').html(data);
+                    $('#dashboardSection').html(data);
                 }
             });
         }
