@@ -6,7 +6,7 @@
     <title>Simple POS</title>
 </head>
 
-<br>
+<body>
 <h1>Simple POS</h1>
 
 <a href="{{route('customer')}}" target="_blank">
@@ -15,8 +15,20 @@
 
 <br/>
 
+<a href="{{route('item')}}" target="_blank">
+    <button>Item</button>
+</a>
+
+<br/>
+
 <a href="{{route('placeOrder')}}" target="_blank">
     <button>Place Order</button>
+</a>
+
+<br/>
+
+<a href="{{route('orderDetails')}}" target="_blank">
+    <button>Order Details</button>
 </a>
 
 </body>
