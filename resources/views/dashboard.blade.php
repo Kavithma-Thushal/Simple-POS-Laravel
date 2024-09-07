@@ -14,6 +14,9 @@
         <div class="navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
+                    <a class="nav-link" href="#" id="homeLink">Home</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#" id="customerLink">Customer</a>
                 </li>
                 <li class="nav-item">
@@ -69,15 +72,26 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
+    var originalDashboardContent = $('#dashboardSection').html();
+
     function loadContent(route) {
-        $.ajax({
-            url: route,
-            type: 'GET',
-            success: function (data) {
-                $('#dashboardSection').html(data);
-            }
-        });
+        if (route === "{{ route('dashboard-management') }}") {
+            $('#dashboardSection').html(originalDashboardContent);
+        } else {
+            $.ajax({
+                url: route,
+                type: 'GET',
+                success: function (data) {
+                    $('#dashboardSection').html(data);
+                }
+            });
+        }
     }
+
+    $('#homeLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('dashboard-management') }}");
+    });
 
     $('#customerLink').on('click', function (e) {
         e.preventDefault();
