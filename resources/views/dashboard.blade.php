@@ -11,21 +11,21 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <div class="navbar-collapse justify-content-center" id="navbarNav">
+        <div class="navbar-collapse justify-content-center">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="homeLink">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="customerLink">Customer</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="itemLink">Item</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="placeOrderLink">Place Order</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="orderDetailsLink">Order Details</a>
                 </li>
             </ul>
