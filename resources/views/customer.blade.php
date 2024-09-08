@@ -22,51 +22,34 @@
 
         <!-- Customer Form -->
         <div class="col-5 p-5 m-3 shadow-lg border-light rounded">
-            <form>
-                <div class="mb-2">
-                    <label for="txtSearchCustomer" class="form-label fw-bold">Search Customer</label>
-                    <div class="d-flex">
-                        <input class="form-control me-2" id="txtSearchCustomer" type="text">
-                        <button class="btn btn-outline-success" id="btnSearchCustomer"
-                                type="button">Search
-                        </button>
-                    </div>
-                </div>
+            <form action="{{ route('save-customer') }}" method="POST">
+                @csrf
                 <div class="mb-2">
                     <label for="txtCustomerId" class="form-label fw-bold">Customer ID</label>
-                    <input class="form-control" id="txtCustomerId" type="text" disabled>
+                    <input class="form-control" id="txtCustomerId" name="id" type="text" required>
                     <div id="txtCusIdError" class="text-danger mt-1"></div>
                 </div>
                 <div class="mb-2">
                     <label for="txtCustomerName" class="form-label fw-bold">Customer Name</label>
-                    <input class="form-control" id="txtCustomerName" type="text">
+                    <input class="form-control" id="txtCustomerName" name="name" type="text" required>
                     <div id="txtCusNameError" class="text-danger mt-1"></div>
                 </div>
                 <div class="mb-2">
                     <label for="txtCustomerAddress" class="form-label fw-bold">Customer Address</label>
-                    <input class="form-control" id="txtCustomerAddress" type="text">
+                    <input class="form-control" id="txtCustomerAddress" name="address" type="text" required>
                     <div id="txtCusAddressError" class="text-danger mt-1"></div>
                 </div>
                 <div class="mb-2">
                     <label for="txtCustomerSalary" class="form-label fw-bold">Customer Salary</label>
-                    <input class="form-control" id="txtCustomerSalary" type="number">
+                    <input class="form-control" id="txtCustomerSalary" name="salary" type="number" step="0.01" required>
                     <div id="txtCusSalaryError" class="text-danger mt-1"></div>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
-                    <button class="btn btn-outline-primary mx-2 w-100" id="btnSaveCustomer" type="button">Save
-                    </button>
-                    <button class="btn btn-outline-warning mx-2 w-100" id="btnUpdateCustomer"
-                            type="button">Update
-                    </button>
-                    <button class="btn btn-outline-danger mx-2 w-100" id="btnDeleteCustomer"
-                            type="button">Delete
-                    </button>
-                    <button class="btn btn-outline-secondary mx-2 w-100" id="btnLoadAllCustomers"
-                            type="button">Load
-                        All
-                    </button>
-                    <button class="btn btn-outline-info mx-2 w-100" id="btnResetCustomer" type="button">Reset
-                    </button>
+                    <button class="btn btn-outline-primary mx-2 w-100" id="btnSaveCustomer" type="submit">Save</button>
+                    <button class="btn btn-outline-warning mx-2 w-100" id="btnUpdateCustomer" type="button">Update</button>
+                    <button class="btn btn-outline-danger mx-2 w-100" id="btnDeleteCustomer" type="button">Delete</button>
+                    <button class="btn btn-outline-secondary mx-2 w-100" id="btnLoadAllCustomers" type="button">Load All</button>
+                    <button class="btn btn-outline-info mx-2 w-100" id="btnResetCustomer" type="reset">Reset</button>
                 </div>
             </form>
         </div>

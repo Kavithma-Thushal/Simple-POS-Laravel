@@ -11,6 +11,7 @@ Route::get('/', function () {
 })->name('dashboard-management');
 
 Route::get('/customer-route', [CustomerController::class, 'getCustomerView'])->name('customer-management');
+Route::post('/save-customer-route', [CustomerController::class, 'saveCustomer'])->name('save-customer');
 Route::get('/item-route', [ItemController::class, 'getItemView'])->name('item-management');
 Route::get('/placer-order-route', [PlaceOrderController::class, 'getPlaceOrderView'])->name('place-order-management');
 Route::get('/order-details-route', [OrderDetailsController::class, 'getOrderDetailsView'])->name('order-details-management');
