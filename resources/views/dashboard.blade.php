@@ -72,11 +72,11 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
-    var originalDashboardContent = $('#dashboardSection').html();
+    var dashboard = $('#dashboardSection').html();
 
     function loadContent(route) {
-        if (route === "{{ route('dashboard-management') }}") {
-            $('#dashboardSection').html(originalDashboardContent);
+        if (route === "{{ route('dashboard-view') }}") {
+            $('#dashboardSection').html(dashboard);
         } else {
             $.ajax({
                 url: route,
@@ -90,27 +90,27 @@
 
     $('#homeLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('dashboard-management') }}");
+        loadContent("{{ route('dashboard-view') }}");
     });
 
     $('#customerLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('customer-management') }}");
+        loadContent("{{ route('customer-view') }}");
     });
 
     $('#itemLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('item-management') }}");
+        loadContent("{{ route('item-view') }}");
     });
 
     $('#placeOrderLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('place-order-management') }}");
+        loadContent("{{ route('place-order-view') }}");
     });
 
     $('#orderDetailsLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('order-details-management') }}");
+        loadContent("{{ route('order-details-view') }}");
     });
 </script>
 </body>

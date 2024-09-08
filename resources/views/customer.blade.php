@@ -22,7 +22,14 @@
 
         <!-- Customer Form -->
         <div class="col-5 p-5 m-3 shadow-lg border-light rounded">
-            <form action="{{ route('save-customer') }}" method="POST">
+            <div class="mb-2">
+                <label for="txtSearchCustomer" class="form-label fw-bold">Search Customer</label>
+                <div class="d-flex">
+                    <input class="form-control me-2" id="txtSearchCustomer" type="text">
+                    <button class="btn btn-outline-success" id="btnSearchCustomer" type="button">Search</button>
+                </div>
+            </div>
+            <form action="{{ route('customer-save') }}" method="POST">
                 @csrf
                 <div class="mb-2">
                     <label for="txtCustomerId" class="form-label fw-bold">Customer ID</label>

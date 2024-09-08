@@ -32,7 +32,7 @@
                 </div>
                 <div class="mb-2">
                     <label for="txtItemCode" class="form-label fw-bold">Item Code</label>
-                    <input class="form-control" id="txtItemCode" type="text" disabled>
+                    <input class="form-control" id="txtItemCode" type="text">
                     <div id="txtItemCodeError" class="text-danger mt-1"></div>
                 </div>
                 <div class="mb-2">
