@@ -14,16 +14,63 @@ class CustomerController extends Controller
 
     public function saveCustomer(Request $request)
     {
-        // Create a new customer
-        $customer = new Customer();
-        $customer->id = $request->input('id');
-        $customer->name = $request->input('name');
-        $customer->address = $request->input('address');
-        $customer->salary = $request->input('salary');
+        $validatedData = $request->validate([
+            'id' => 'required|string',
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'salary' => 'required|numeric',
+        ]);
 
-        // Save customer to the database
-        $customer->save();
+        $customer = Customer::updateOrCreate(
+            ['id' => $request->input('id')],
+            $validatedData
+        );
 
         return response()->json(['message' => 'Customer Saved Successfully...!'], 201);
+    }
+
+    public function searchCustomer(Request $request)
+    {
+        $query = $request->input('query');
+        $customers = Customer::where('name', 'like', "%{$query}%")
+            ->orWhere('address', 'like', "%{$query}%")
+            ->get();
+
+        return response()->json($customers);
+    }
+
+    public function updateCustomer(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id' => 'required|string',
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'salary' => 'required|numeric',
+        ]);
+
+        $customer = Customer::find($request->input('id'));
+        if ($customer) {
+            $customer->update($validatedData);
+            return response()->json(['message' => 'Customer Updated Successfully!']);
+        }
+
+        return response()->json(['message' => 'Customer Not Found!'], 404);
+    }
+
+    public function deleteCustomer(Request $request)
+    {
+        $customer = Customer::find($request->input('id'));
+        if ($customer) {
+            $customer->delete();
+            return response()->json(['message' => 'Customer Deleted Successfully!']);
+        }
+
+        return response()->json(['message' => 'Customer Not Found!'], 404);
+    }
+
+    public function getAllCustomers()
+    {
+        $customers = Customer::all();
+        return response()->json($customers);
     }
 }

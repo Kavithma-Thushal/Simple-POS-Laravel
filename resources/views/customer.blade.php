@@ -29,7 +29,7 @@
                     <button class="btn btn-outline-success" id="btnSearchCustomer" type="button">Search</button>
                 </div>
             </div>
-            <form action="{{ route('customer-save') }}" method="POST">
+            <form id="customerForm">
                 @csrf
                 <div class="mb-2">
                     <label for="txtCustomerId" class="form-label fw-bold">Customer ID</label>
@@ -53,9 +53,13 @@
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     <button class="btn btn-outline-primary mx-2 w-100" id="btnSaveCustomer" type="submit">Save</button>
-                    <button class="btn btn-outline-warning mx-2 w-100" id="btnUpdateCustomer" type="button">Update</button>
-                    <button class="btn btn-outline-danger mx-2 w-100" id="btnDeleteCustomer" type="button">Delete</button>
-                    <button class="btn btn-outline-secondary mx-2 w-100" id="btnLoadAllCustomers" type="button">Load All</button>
+                    <button class="btn btn-outline-warning mx-2 w-100" id="btnUpdateCustomer" type="button">Update
+                    </button>
+                    <button class="btn btn-outline-danger mx-2 w-100" id="btnDeleteCustomer" type="button">Delete
+                    </button>
+                    <button class="btn btn-outline-secondary mx-2 w-100" id="btnGetAllCustomers" type="button">Load
+                        All
+                    </button>
                     <button class="btn btn-outline-info mx-2 w-100" id="btnResetCustomer" type="reset">Reset</button>
                 </div>
             </form>
@@ -63,3 +67,126 @@
 
     </div>
 </main>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const $form = $('#customerForm');
+        const $customerTable = $('#customerTable');
+
+        // Save Customer
+        $('#btnSaveCustomer').click(function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            $.ajax({
+                url: '{{ route('customer-save') }}',
+                type: 'POST',
+                data: $form.serialize(), // Serialize form data
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    alert(data.message);
+                    loadCustomers();
+                },
+                error: function (xhr) {
+                    console.error('Error:', xhr.responseText);
+                }
+            });
+        });
+
+        // Search Customer
+        $('#btnSearchCustomer').click(function () {
+            const query = $('#txtSearchCustomer').val();
+            $.ajax({
+                url: '{{ route('customer-search') }}',
+                type: 'GET',
+                data: {query: query},
+                success: function (customers) {
+                    $customerTable.empty();
+                    $.each(customers, function (index, customer) {
+                        $customerTable.append(`
+                            <tr>
+                                <td>${customer.id}</td>
+                                <td>${customer.name}</td>
+                                <td>${customer.address}</td>
+                                <td>${customer.salary}</td>
+                            </tr>
+                        `);
+                    });
+                },
+                error: function (xhr) {
+                    console.error('Error:', xhr.responseText);
+                }
+            });
+        });
+
+        // Update Customer
+        $('#btnUpdateCustomer').click(function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            $.ajax({
+                url: '{{ route('customer-update', '') }}/' + $('#txtCustomerId').val(),
+                type: 'PUT',
+                data: $form.serialize(), // Serialize form data
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    alert(data.message);
+                    loadCustomers();
+                },
+                error: function (xhr) {
+                    console.error('Error:', xhr.responseText);
+                }
+            });
+        });
+
+        // Delete Customer
+        $('#btnDeleteCustomer').click(function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            $.ajax({
+                url: '{{ route('customer-delete', '') }}/' + $('#txtCustomerId').val(),
+                type: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    alert(data.message);
+                    loadCustomers();
+                },
+                error: function (xhr) {
+                    console.error('Error:', xhr.responseText);
+                }
+            });
+        });
+
+        // Get All Customers
+        $('#btnGetAllCustomers').click(function () {
+            loadCustomers();
+        });
+
+        function loadCustomers() {
+            $.ajax({
+                url: '{{ route('customers-get-all') }}',
+                type: 'GET',
+                success: function (customers) {
+                    $customerTable.empty();
+                    $.each(customers, function (index, customer) {
+                        $customerTable.append(`
+                            <tr>
+                                <td>${customer.id}</td>
+                                <td>${customer.name}</td>
+                                <td>${customer.address}</td>
+                                <td>${customer.salary}</td>
+                            </tr>
+                        `);
+                    });
+                },
+                error: function (xhr) {
+                    console.error('Error:', xhr.responseText);
+                }
+            });
+        }
+    });
+</script>
