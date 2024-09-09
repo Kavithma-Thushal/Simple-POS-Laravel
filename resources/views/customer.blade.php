@@ -82,7 +82,7 @@
                 type: 'POST',
                 data: $customerForm.serialize(),
                 // headers: {
-                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 // },
                 success: function (data) {
                     alert(data.message);
