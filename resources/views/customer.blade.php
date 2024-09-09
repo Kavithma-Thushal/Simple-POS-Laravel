@@ -30,7 +30,7 @@
                 </div>
             </div>
             <form id="customerForm">
-                @csrf
+                {{--@csrf--}}
                 <div class="mb-2">
                     <label for="txtCustomerId" class="form-label fw-bold">Customer ID</label>
                     <input class="form-control" id="txtCustomerId" name="id" type="text" required>
@@ -81,9 +81,9 @@
                 url: '{{ route('customer-save') }}',
                 type: 'POST',
                 data: $customerForm.serialize(),
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
+                // headers: {
+                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                // },
                 success: function (data) {
                     alert(data.message);
                     loadCustomers();
