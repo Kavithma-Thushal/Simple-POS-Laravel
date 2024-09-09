@@ -70,17 +70,17 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        const $form = $('#customerForm');
-        const $customerTable = $('#customerTable');
+        let $form = $('#customerForm');
+        let $customerTable = $('#customerTable');
 
         // Save Customer
         $('#btnSaveCustomer').click(function (e) {
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault();
 
             $.ajax({
                 url: '{{ route('customer-save') }}',
                 type: 'POST',
-                data: $form.serialize(), // Serialize form data
+                data: $form.serialize(),
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -122,12 +122,12 @@
 
         // Update Customer
         $('#btnUpdateCustomer').click(function (e) {
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault();
 
             $.ajax({
                 url: '{{ route('customer-update', '') }}/' + $('#txtCustomerId').val(),
                 type: 'PUT',
-                data: $form.serialize(), // Serialize form data
+                data: $form.serialize(),
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -143,7 +143,7 @@
 
         // Delete Customer
         $('#btnDeleteCustomer').click(function (e) {
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault();
 
             $.ajax({
                 url: '{{ route('customer-delete', '') }}/' + $('#txtCustomerId').val(),
