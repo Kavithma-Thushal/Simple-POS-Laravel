@@ -67,11 +67,10 @@
 
     </div>
 </main>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        let $customerForm = $('#customerForm');
-        let $customerTable = $('#customerTable');
+        let customerForm = $('#customerForm');
+        let customerTable = $('#customerTable');
 
         // Save Customer
         $('#btnSaveCustomer').click(function (e) {
@@ -80,7 +79,7 @@
             $.ajax({
                 url: '{{ route('customer-save') }}',
                 type: 'POST',
-                data: $customerForm.serialize(),
+                data: customerForm.serialize(),
                 // headers: {
                 //     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 // },
@@ -102,9 +101,9 @@
                 type: 'GET',
                 data: {query: query},
                 success: function (customers) {
-                    $customerTable.empty();
+                    customerTable.empty();
                     $.each(customers, function (index, customer) {
-                        $customerTable.append(`
+                        customerTable.append(`
                             <tr>
                                 <td>${customer.id}</td>
                                 <td>${customer.name}</td>
@@ -127,7 +126,7 @@
             $.ajax({
                 url: '{{ route('customer-update', '') }}/' + $('#txtCustomerId').val(),
                 type: 'PUT',
-                data: $customerForm.serialize(),
+                data: customerForm.serialize(),
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -171,9 +170,9 @@
                 url: '{{ route('customers-get-all') }}',
                 type: 'GET',
                 success: function (customers) {
-                    $customerTable.empty();
+                    customerTable.empty();
                     $.each(customers, function (index, customer) {
-                        $customerTable.append(`
+                        customerTable.append(`
                             <tr>
                                 <td>${customer.id}</td>
                                 <td>${customer.name}</td>
