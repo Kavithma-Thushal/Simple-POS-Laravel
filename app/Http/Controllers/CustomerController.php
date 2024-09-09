@@ -15,17 +15,12 @@ class CustomerController extends Controller
     public function saveCustomer(Request $request)
     {
         $validatedData = $request->validate([
-            'id' => 'required|string',
+            'id' => 'required|string|unique:customers,id',
             'name' => 'required|string',
             'address' => 'required|string',
             'salary' => 'required|numeric',
         ]);
-
-        Customer::updateOrCreate(
-            ['id' => $request->input('id')],
-            $validatedData
-        );
-
+        Customer::create($validatedData);
         return response()->json(['message' => 'Customer Saved Successfully...!'], 201);
     }
 
