@@ -70,7 +70,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        let $form = $('#customerForm');
+        let $customerForm = $('#customerForm');
         let $customerTable = $('#customerTable');
 
         // Save Customer
@@ -80,7 +80,7 @@
             $.ajax({
                 url: '{{ route('customer-save') }}',
                 type: 'POST',
-                data: $form.serialize(),
+                data: $customerForm.serialize(),
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -88,8 +88,8 @@
                     alert(data.message);
                     loadCustomers();
                 },
-                error: function (xhr) {
-                    console.error('Error:', xhr.responseText);
+                error: function (error) {
+                    alert(error.responseJSON.message);
                 }
             });
         });
@@ -127,7 +127,7 @@
             $.ajax({
                 url: '{{ route('customer-update', '') }}/' + $('#txtCustomerId').val(),
                 type: 'PUT',
-                data: $form.serialize(),
+                data: $customerForm.serialize(),
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },

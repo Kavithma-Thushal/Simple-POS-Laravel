@@ -21,7 +21,7 @@ class CustomerController extends Controller
             'salary' => 'required|numeric',
         ]);
 
-        $customer = Customer::updateOrCreate(
+        Customer::updateOrCreate(
             ['id' => $request->input('id')],
             $validatedData
         );
