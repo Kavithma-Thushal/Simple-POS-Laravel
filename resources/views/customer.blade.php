@@ -72,9 +72,6 @@
 
         getAllCustomers();
 
-        let customerForm = $('#customerForm');
-        let customerTable = $('#customerTable');
-
         // Save Customer
         $('#btnSaveCustomer').click(function (e) {
             e.preventDefault();
@@ -82,7 +79,7 @@
             $.ajax({
                 url: '{{ route('customer-save') }}',
                 type: 'POST',
-                data: customerForm.serialize(),
+                data: $('#customerForm').serialize(),
                 // headers: {
                 //     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 // },
@@ -130,7 +127,7 @@
             $.ajax({
                 url: '{{ route('customer-update') }}',
                 type: 'PUT',
-                data: customerForm.serialize(),
+                data: $('#customerForm').serialize(),
                 success: function (response) {
                     getAllCustomers();
                     alert(response.message);
