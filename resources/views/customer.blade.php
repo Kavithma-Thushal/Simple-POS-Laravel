@@ -15,7 +15,7 @@
                         <th scope="col" class="w-25">Salary</th>
                     </tr>
                     </thead>
-                    <tbody id="customerTable"></tbody>
+                    <tbody id="customerTable" style="cursor: pointer"></tbody>
                 </table>
             </div>
         </div>
