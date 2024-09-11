@@ -191,11 +191,31 @@
                         </tr>`;
                         $("#customerTable").append(row);
                     });
+                    generateCustomerId();
                     customerTableListener();
                     clearCustomerInputs();
                     console.log(response.message);
                 },
 
+                error: function (error) {
+                    console.log(error.responseJSON.message);
+                }
+            });
+        }
+
+        function generateCustomerId() {
+            $.ajax({
+                url: '{{ route('customers-generate-id') }}',
+                method: "GET",
+                success: function (response) {
+                    let lastCustomerId = response.data;
+                    let parts = lastCustomerId.split('-');
+                    let prefix = parts[0];
+                    let number = parseInt(parts[1]) + 1;
+                    let newCustomerId = prefix + '-' + number.toString().padStart(3, '0');
+                    $("#txtCustomerId").val(newCustomerId);
+                    console.log(response.message);
+                },
                 error: function (error) {
                     console.log(error.responseJSON.message);
                 }

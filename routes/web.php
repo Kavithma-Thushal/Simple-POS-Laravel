@@ -16,6 +16,7 @@ Route::controller(CustomerController::class)->group(function () {
     Route::put('/customer-update-route', 'updateCustomer')->name('customer-update');
     Route::delete('/customer-delete-route', 'deleteCustomer')->name('customer-delete');
     Route::get('/customers-get-all-route', 'getAllCustomers')->name('customers-get-all');
+    Route::get('/generate-customer-id', [CustomerController::class, 'generateCustomerId'])->name('customers-generate-id');
 });
 
 Route::get('/item-view-route', [ItemController::class, 'getItemView'])->name('item-view');

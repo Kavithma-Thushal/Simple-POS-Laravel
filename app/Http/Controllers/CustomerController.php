@@ -65,4 +65,19 @@ class CustomerController extends Controller
         $customers = Customer::all();
         return response()->json($customers);
     }
+
+    public function generateCustomerId()
+    {
+        // Fetch the last customer ID from the database
+        $lastCustomerId = Customer::orderBy('id', 'desc')->value('id');
+
+        if (!$lastCustomerId) {
+            $lastCustomerId = "C00-000";
+        }
+
+        return response()->json([
+            'data' => $lastCustomerId,
+            'message' => 'Last customer ID Retrieved Successfully...!'
+        ], 200);
+    }
 }
