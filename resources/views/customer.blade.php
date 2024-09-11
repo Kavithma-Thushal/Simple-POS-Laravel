@@ -190,6 +190,7 @@
                         </tr>`;
                         $("#customerTable").append(row);
                     });
+                    customerCount();
                     generateCustomerId();
                     customerTableListener();
                     clearCustomerInputs();
@@ -248,6 +249,20 @@
             $("#btnSaveCustomer").prop("disabled", false);
             $("#btnUpdateCustomer").prop("disabled", true);
             $("#btnDeleteCustomer").prop("disabled", true);
+        }
+
+        function customerCount() {
+            $.ajax({
+                url: '{{ route('customer-count') }}',
+                method: "GET",
+                success: function (response) {
+                    $("#customerCount").text(response.data);
+                    console.log(response.data);
+                },
+                error: function (error) {
+                    console.log(error.responseJSON.message);
+                }
+            });
         }
     });
 </script>

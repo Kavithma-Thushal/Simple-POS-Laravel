@@ -73,7 +73,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
     $(document).ready(function () {
-        customerCount();
 
         let dashboard = $('#dashboardSection').html();
 
@@ -115,20 +114,6 @@
             e.preventDefault();
             loadContent("{{ route('view-order-details') }}");
         });
-
-        function customerCount() {
-            $.ajax({
-                url: '{{ route('customer-count') }}',
-                method: "GET",
-                success: function (response) {
-                    $("#customerCount").text(response.data);
-                    console.log(response.data);
-                },
-                error: function (error) {
-                    console.log(error.responseJSON.message);
-                }
-            });
-        }
     });
 </script>
 </body>
