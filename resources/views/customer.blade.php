@@ -191,11 +191,44 @@
                         </tr>`;
                         $("#customerTable").append(row);
                     });
+                    customerTableListener();
+                    clearCustomerInputs();
+                    console.log(response.message);
                 },
+
                 error: function (error) {
                     console.log(error.responseJSON.message);
                 }
             });
+        }
+
+        function customerTableListener() {
+            $("#customerTable>tr").on("click", function () {
+                let id = $(this).children().eq(0).text();
+                let name = $(this).children().eq(1).text();
+                let address = $(this).children().eq(2).text();
+                let salary = $(this).children().eq(3).text();
+
+                $("#txtCustomerId").val(id);
+                $("#txtCustomerName").val(name);
+                $("#txtCustomerAddress").val(address);
+                $("#txtCustomerSalary").val(salary);
+
+                $("#btnUpdateCustomer").prop("disabled", false);
+                $("#btnDeleteCustomer").prop("disabled", false);
+            });
+        }
+
+        function clearCustomerInputs() {
+            $("#txtSearchCustomer").val("");
+            $("#txtCustomerId").val("");
+            $("#txtCustomerName").val("");
+            $("#txtCustomerAddress").val("");
+            $("#txtCustomerSalary").val("");
+
+            $("#btnSaveCustomer").prop("disabled", false);
+            $("#btnUpdateCustomer").prop("disabled", true);
+            $("#btnDeleteCustomer").prop("disabled", true);
         }
     });
 </script>
