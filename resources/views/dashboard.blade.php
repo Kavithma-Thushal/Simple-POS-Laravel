@@ -75,7 +75,7 @@
     var dashboard = $('#dashboardSection').html();
 
     function loadContent(route) {
-        if (route === "{{ route('dashboard-view') }}") {
+        if (route === "{{ route('view-dashboard') }}") {
             $('#dashboardSection').html(dashboard);
         } else {
             $.ajax({
@@ -90,27 +90,27 @@
 
     $('#homeLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('dashboard-view') }}");
+        loadContent("{{ route('view-dashboard') }}");
     });
 
     $('#customerLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('customer-view') }}");
+        loadContent("{{ route('view-customer') }}");
     });
 
     $('#itemLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('item-view') }}");
+        loadContent("{{ route('view-item') }}");
     });
 
     $('#placeOrderLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('place-order-view') }}");
+        loadContent("{{ route('view-place-order') }}");
     });
 
     $('#orderDetailsLink').on('click', function (e) {
         e.preventDefault();
-        loadContent("{{ route('order-details-view') }}");
+        loadContent("{{ route('view-order-details') }}");
     });
 </script>
 </body>

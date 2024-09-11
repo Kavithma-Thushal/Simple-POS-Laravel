@@ -7,7 +7,7 @@ use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-    public function getCustomerView()
+    public function viewCustomer()
     {
         return view('customer');
     }

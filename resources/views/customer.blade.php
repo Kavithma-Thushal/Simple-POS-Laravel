@@ -33,7 +33,7 @@
                 {{--@csrf--}}
                 <div class="mb-2">
                     <label for="txtCustomerId" class="form-label fw-bold">Customer ID</label>
-                    <input class="form-control" id="txtCustomerId" name="id" type="text" required>
+                    <input class="form-control" id="txtCustomerId" name="id" type="text" required disabled>
                     <div id="txtCusIdError" class="text-danger mt-1"></div>
                 </div>
                 <div class="mb-2">
@@ -77,7 +77,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('customer-save') }}',
+                url: '{{ route('save-customer') }}',
                 type: 'POST',
                 data: $('#customerForm').serialize(),
                 // headers: {
@@ -99,7 +99,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('customer-search') }}',
+                url: '{{ route('search-customer') }}',
                 method: "GET",
                 data: {id: $("#txtSearchCustomer").val()},
                 success: function (response) {
@@ -127,7 +127,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('customer-update') }}',
+                url: '{{ route('update-customer') }}',
                 type: 'PUT',
                 data: $('#customerForm').serialize(),
                 success: function (response) {
@@ -146,7 +146,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('customer-delete') }}',
+                url: '{{ route('delete-customer') }}',
                 type: 'DELETE',
                 data: {id: $("#txtCustomerId").val()},
                 success: function (response) {
@@ -172,7 +172,7 @@
 
         function getAllCustomers() {
             $.ajax({
-                url: '{{ route('customers-get-all') }}',
+                url: '{{ route('get-all-customers') }}',
                 type: 'GET',
                 success: function (response) {
                     $('#customerTable').empty();
@@ -205,7 +205,7 @@
 
         function generateCustomerId() {
             $.ajax({
-                url: '{{ route('customers-generate-id') }}',
+                url: '{{ route('generate-customer-id') }}',
                 method: "GET",
                 success: function (response) {
                     let lastCustomerId = response.data;

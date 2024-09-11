@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 class DashboardController extends Controller
 {
-    public function getDashboardView()
+    public function viewDashboard()
     {
         return view('dashboard');
     }
