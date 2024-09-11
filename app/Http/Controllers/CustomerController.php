@@ -57,8 +57,7 @@ class CustomerController extends Controller
             $customer->delete();
             return response()->json(['message' => 'Customer Deleted Successfully!']);
         }
-
-        return response()->json(['message' => 'Customer Not Found!'], 404);
+        return response()->json(['message' => 'Customer Not Found...!'], 404);
     }
 
     public function getAllCustomers()

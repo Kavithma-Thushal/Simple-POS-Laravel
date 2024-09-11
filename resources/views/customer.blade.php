@@ -95,13 +95,13 @@
         });
 
         // Search Customer
-        $('#btnSearchCustomer').click(function () {
-            let searchId = $("#txtSearchCustomer").val();
+        $('#btnSearchCustomer').click(function (e) {
+            e.preventDefault();
 
             $.ajax({
                 url: '{{ route('customer-search') }}',
                 method: "GET",
-                data: {id: searchId},
+                data: {id: $("#txtSearchCustomer").val()},
                 success: function (response) {
                     $("#customerTable").empty();
 
@@ -146,23 +146,27 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('customer-delete', '') }}/' + $('#txtCustomerId').val(),
+                url: '{{ route('customer-delete') }}',
                 type: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (data) {
-                    alert(data.message);
+                data: {id: $("#txtCustomerId").val()},
+                success: function (response) {
                     getAllCustomers();
+                    alert(response.message);
                 },
-                error: function (xhr) {
-                    console.error('Error:', xhr.responseText);
+                error: function (error) {
+                    getAllCustomers();
+                    alert(error.responseJSON.message);
                 }
             });
         });
 
         // Get All Customers
         $('#btnGetAllCustomers').click(function () {
+            getAllCustomers();
+        });
+
+        // Reset Customers
+        $('#btnResetCustomer').click(function () {
             getAllCustomers();
         });
 
