@@ -96,26 +96,28 @@
 
         // Search Customer
         $('#btnSearchCustomer').click(function () {
-            const query = $('#txtSearchCustomer').val();
+            let searchId = $("#txtSearchCustomer").val();
+
             $.ajax({
                 url: '{{ route('customer-search') }}',
-                type: 'GET',
-                data: {query: query},
-                success: function (customers) {
-                    customerTable.empty();
-                    $.each(customers, function (index, customer) {
-                        customerTable.append(`
-                            <tr>
-                                <td>${customer.id}</td>
-                                <td>${customer.name}</td>
-                                <td>${customer.address}</td>
-                                <td>${customer.salary}</td>
-                            </tr>
-                        `);
-                    });
+                method: "GET",
+                data: {id: searchId},
+                success: function (response) {
+                    $("#customerTable").empty();
+
+                    let row = `<tr>
+                    <td>${response.data.id}</td>
+                    <td>${response.data.name}</td>
+                    <td>${response.data.address}</td>
+                    <td>${response.data.salary}</td>
+                </tr>`;
+
+                    $("#customerTable").append(row);
+                    console.log(response.message);
                 },
-                error: function (xhr) {
-                    console.error('Error:', xhr.responseText);
+                error: function (error) {
+                    getAllCustomers();
+                    alert(error.responseJSON.message);
                 }
             });
         });

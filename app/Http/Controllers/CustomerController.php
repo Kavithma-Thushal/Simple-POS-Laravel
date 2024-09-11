@@ -27,12 +27,13 @@ class CustomerController extends Controller
 
     public function searchCustomer(Request $request)
     {
-        $query = $request->input('query');
-        $customers = Customer::where('name', 'like', "%{$query}%")
-            ->orWhere('address', 'like', "%{$query}%")
-            ->get();
-
-        return response()->json($customers);
+        $query = $request->input('id');
+        $customer = Customer::where('id', $query)->first();
+        if ($customer) {
+            return response()->json(['data' => $customer]);
+        } else {
+            return response()->json(['message' => 'Customer Not Found...!'], 404);
+        }
     }
 
     public function updateCustomer(Request $request)
