@@ -61,11 +61,12 @@ class CustomerController extends Controller
         $customer = Customer::find($request->input('id'));
         if ($customer) {
             $customer->delete();
-            return response()->json(['message' => 'Customer Deleted Successfully!']);
+            return response()->json(['message' => 'Customer Deleted Successfully...!']);
+        } else {
+            return response()->json(
+                ['message' => 'Customer Not Found...!'],
+                404);
         }
-        return response()->json(
-            ['message' => 'Customer Not Found...!'],
-            404);
     }
 
     public function getAllCustomers()
@@ -76,7 +77,6 @@ class CustomerController extends Controller
 
     public function generateCustomerId()
     {
-        // Fetch the last customer ID from the database
         $lastCustomerId = Customer::orderBy('id', 'desc')->value('id');
 
         if (!$lastCustomerId) {
@@ -86,17 +86,16 @@ class CustomerController extends Controller
         return response()->json([
             'data' => $lastCustomerId,
             'message' => 'Last customer ID Retrieved Successfully...!'
-        ], 200);
+        ]);
     }
 
     public function customerCount()
     {
-        // Fetch the total count of customers
         $totalCustomers = Customer::count();
 
         return response()->json([
             'data' => $totalCustomers,
             'message' => 'Total Customer Count Retrieved Successfully...!'
-        ], 200);
+        ]);
     }
 }
