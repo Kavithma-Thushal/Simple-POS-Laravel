@@ -70,7 +70,7 @@
 <script>
     $(document).ready(function () {
 
-        loadAllCustomers();
+        getAllCustomers();
 
         let customerForm = $('#customerForm');
         let customerTable = $('#customerTable');
@@ -87,11 +87,11 @@
                 //     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 // },
                 success: function (response) {
-                    loadAllCustomers();
+                    getAllCustomers();
                     alert(response.message);
                 },
                 error: function (error) {
-                    loadAllCustomers();
+                    getAllCustomers();
                     alert(error.responseJSON.message);
                 }
             });
@@ -132,11 +132,11 @@
                 type: 'PUT',
                 data: customerForm.serialize(),
                 success: function (response) {
-                    loadAllCustomers();
+                    getAllCustomers();
                     alert(response.message);
                 },
                 error: function (error) {
-                    loadAllCustomers();
+                    getAllCustomers();
                     console.error(error.responseJSON.message);
                 }
             });
@@ -154,7 +154,7 @@
                 },
                 success: function (data) {
                     alert(data.message);
-                    loadAllCustomers();
+                    getAllCustomers();
                 },
                 error: function (xhr) {
                     console.error('Error:', xhr.responseText);
@@ -164,28 +164,33 @@
 
         // Get All Customers
         $('#btnGetAllCustomers').click(function () {
-            loadAllCustomers();
+            getAllCustomers();
         });
 
-        function loadAllCustomers() {
+        function getAllCustomers() {
             $.ajax({
                 url: '{{ route('customers-get-all') }}',
                 type: 'GET',
-                success: function (customers) {
-                    customerTable.empty();
-                    $.each(customers, function (index, customer) {
-                        customerTable.append(`
-                            <tr>
-                                <td>${customer.id}</td>
-                                <td>${customer.name}</td>
-                                <td>${customer.address}</td>
-                                <td>${customer.salary}</td>
-                            </tr>
-                        `);
+                success: function (response) {
+                    $('#customerTable').empty();
+
+                    response.forEach(customer => {
+                        let id = customer.id;
+                        let name = customer.name;
+                        let address = customer.address;
+                        let salary = customer.salary;
+
+                        let row = `<tr>
+                            <td>${id}</td>
+                            <td>${name}</td>
+                            <td>${address}</td>
+                            <td>${salary}</td>
+                        </tr>`;
+                        $("#customerTable").append(row);
                     });
                 },
-                error: function (xhr) {
-                    console.error('Error:', xhr.responseText);
+                error: function (error) {
+                    console.log(error.responseJSON.message);
                 }
             });
         }
