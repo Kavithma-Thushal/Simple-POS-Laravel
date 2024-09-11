@@ -72,45 +72,63 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
-    var dashboard = $('#dashboardSection').html();
+    $(document).ready(function () {
+        customerCount();
 
-    function loadContent(route) {
-        if (route === "{{ route('view-dashboard') }}") {
-            $('#dashboardSection').html(dashboard);
-        } else {
+        let dashboard = $('#dashboardSection').html();
+
+        function loadContent(route) {
+            if (route === "{{ route('view-dashboard') }}") {
+                $('#dashboardSection').html(dashboard);
+            } else {
+                $.ajax({
+                    url: route,
+                    type: 'GET',
+                    success: function (data) {
+                        $('#dashboardSection').html(data);
+                    }
+                });
+            }
+        }
+
+        $('#homeLink').on('click', function (e) {
+            e.preventDefault();
+            loadContent("{{ route('view-dashboard') }}");
+        });
+
+        $('#customerLink').on('click', function (e) {
+            e.preventDefault();
+            loadContent("{{ route('view-customer') }}");
+        });
+
+        $('#itemLink').on('click', function (e) {
+            e.preventDefault();
+            loadContent("{{ route('view-item') }}");
+        });
+
+        $('#placeOrderLink').on('click', function (e) {
+            e.preventDefault();
+            loadContent("{{ route('view-place-order') }}");
+        });
+
+        $('#orderDetailsLink').on('click', function (e) {
+            e.preventDefault();
+            loadContent("{{ route('view-order-details') }}");
+        });
+
+        function customerCount() {
             $.ajax({
-                url: route,
-                type: 'GET',
-                success: function (data) {
-                    $('#dashboardSection').html(data);
+                url: '{{ route('customer-count') }}',
+                method: "GET",
+                success: function (response) {
+                    $("#customerCount").text(response.data);
+                    console.log(response.data);
+                },
+                error: function (error) {
+                    console.log(error.responseJSON.message);
                 }
             });
         }
-    }
-
-    $('#homeLink').on('click', function (e) {
-        e.preventDefault();
-        loadContent("{{ route('view-dashboard') }}");
-    });
-
-    $('#customerLink').on('click', function (e) {
-        e.preventDefault();
-        loadContent("{{ route('view-customer') }}");
-    });
-
-    $('#itemLink').on('click', function (e) {
-        e.preventDefault();
-        loadContent("{{ route('view-item') }}");
-    });
-
-    $('#placeOrderLink').on('click', function (e) {
-        e.preventDefault();
-        loadContent("{{ route('view-place-order') }}");
-    });
-
-    $('#orderDetailsLink').on('click', function (e) {
-        e.preventDefault();
-        loadContent("{{ route('view-order-details') }}");
     });
 </script>
 </body>

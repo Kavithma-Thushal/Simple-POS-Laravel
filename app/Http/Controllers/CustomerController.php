@@ -22,7 +22,9 @@ class CustomerController extends Controller
         ]);
 
         Customer::create($validatedData);
-        return response()->json(['message' => 'Customer Saved Successfully...!'], 201);
+        return response()->json(
+            ['message' => 'Customer Saved Successfully...!'],
+            201);
     }
 
     public function searchCustomer(Request $request)
@@ -32,7 +34,9 @@ class CustomerController extends Controller
         if ($customer) {
             return response()->json(['data' => $customer]);
         } else {
-            return response()->json(['message' => 'Customer Not Found...!'], 404);
+            return response()->json(
+                ['message' => 'Customer Not Found...!'],
+                404);
         }
     }
 
@@ -47,7 +51,9 @@ class CustomerController extends Controller
 
         $customer = Customer::findOrFail($validatedData['id']);
         $customer->update($validatedData);
-        return response()->json(['message' => 'Customer Updated Successfully...!'], 201);
+        return response()->json(
+            ['message' => 'Customer Updated Successfully...!'],
+            201);
     }
 
     public function deleteCustomer(Request $request)
@@ -57,7 +63,9 @@ class CustomerController extends Controller
             $customer->delete();
             return response()->json(['message' => 'Customer Deleted Successfully!']);
         }
-        return response()->json(['message' => 'Customer Not Found...!'], 404);
+        return response()->json(
+            ['message' => 'Customer Not Found...!'],
+            404);
     }
 
     public function getAllCustomers()
@@ -78,6 +86,17 @@ class CustomerController extends Controller
         return response()->json([
             'data' => $lastCustomerId,
             'message' => 'Last customer ID Retrieved Successfully...!'
+        ], 200);
+    }
+
+    public function customerCount()
+    {
+        // Fetch the total count of customers
+        $totalCustomers = Customer::count();
+
+        return response()->json([
+            'data' => $totalCustomers,
+            'message' => 'Total Customer Count Retrieved Successfully...!'
         ], 200);
     }
 }

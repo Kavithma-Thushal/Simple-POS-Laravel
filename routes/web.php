@@ -17,6 +17,7 @@ Route::controller(CustomerController::class)->group(function () {
     Route::delete('/delete-customer-route', 'deleteCustomer')->name('delete-customer');
     Route::get('/get-all-customers-route', 'getAllCustomers')->name('get-all-customers');
     Route::get('/generate-customer-id-route', 'generateCustomerId')->name('generate-customer-id');
+    Route::get('/customer-count-route', 'customerCount')->name('customer-count');
 });
 
 Route::get('/view-item-route', [ItemController::class, 'viewItem'])->name('view-item');

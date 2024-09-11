@@ -33,7 +33,7 @@
                 {{--@csrf--}}
                 <div class="mb-2">
                     <label for="txtCustomerId" class="form-label fw-bold">Customer ID</label>
-                    <input class="form-control" id="txtCustomerId" name="id" type="text" required disabled>
+                    <input class="form-control" id="txtCustomerId" name="id" type="text" required readonly>
                     <div id="txtCusIdError" class="text-danger mt-1"></div>
                 </div>
                 <div class="mb-2">
