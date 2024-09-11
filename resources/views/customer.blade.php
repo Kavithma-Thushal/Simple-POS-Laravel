@@ -69,7 +69,6 @@
 </main>
 <script>
     $(document).ready(function () {
-
         getAllCustomers();
 
         // Save Customer
