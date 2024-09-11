@@ -20,6 +20,7 @@ class CustomerController extends Controller
             'address' => 'required|string',
             'salary' => 'required|numeric',
         ]);
+
         Customer::create($validatedData);
         return response()->json(['message' => 'Customer Saved Successfully...!'], 201);
     }
@@ -43,13 +44,9 @@ class CustomerController extends Controller
             'salary' => 'required|numeric',
         ]);
 
-        $customer = Customer::find($request->input('id'));
-        if ($customer) {
-            $customer->update($validatedData);
-            return response()->json(['message' => 'Customer Updated Successfully!']);
-        }
-
-        return response()->json(['message' => 'Customer Not Found!'], 404);
+        $customer = Customer::findOrFail($validatedData['id']);
+        $customer->update($validatedData);
+        return response()->json(['message' => 'Customer Updated Successfully...!'], 201);
     }
 
     public function deleteCustomer(Request $request)

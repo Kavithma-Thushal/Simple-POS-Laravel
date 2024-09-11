@@ -69,6 +69,9 @@
 </main>
 <script>
     $(document).ready(function () {
+
+        loadAllCustomers();
+
         let customerForm = $('#customerForm');
         let customerTable = $('#customerTable');
 
@@ -83,11 +86,12 @@
                 // headers: {
                 //     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 // },
-                success: function (data) {
-                    alert(data.message);
-                    loadCustomers();
+                success: function (response) {
+                    loadAllCustomers();
+                    alert(response.message);
                 },
                 error: function (error) {
+                    loadAllCustomers();
                     alert(error.responseJSON.message);
                 }
             });
@@ -124,18 +128,16 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('customer-update', '') }}/' + $('#txtCustomerId').val(),
+                url: '{{ route('customer-update') }}',
                 type: 'PUT',
                 data: customerForm.serialize(),
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                success: function (response) {
+                    loadAllCustomers();
+                    alert(response.message);
                 },
-                success: function (data) {
-                    alert(data.message);
-                    loadCustomers();
-                },
-                error: function (xhr) {
-                    console.error('Error:', xhr.responseText);
+                error: function (error) {
+                    loadAllCustomers();
+                    console.error(error.responseJSON.message);
                 }
             });
         });
@@ -152,7 +154,7 @@
                 },
                 success: function (data) {
                     alert(data.message);
-                    loadCustomers();
+                    loadAllCustomers();
                 },
                 error: function (xhr) {
                     console.error('Error:', xhr.responseText);
@@ -162,10 +164,10 @@
 
         // Get All Customers
         $('#btnGetAllCustomers').click(function () {
-            loadCustomers();
+            loadAllCustomers();
         });
 
-        function loadCustomers() {
+        function loadAllCustomers() {
             $.ajax({
                 url: '{{ route('customers-get-all') }}',
                 type: 'GET',
