@@ -6,7 +6,7 @@ order processing, with both frontend and backend components.
 
 ## 🛠️ Tech Stack
 
-# 🔥 FrontEnd
+### 🔥 FrontEnd
 
 ✅ **HTML**<br/>
 ✅ **CSS**<br/>
@@ -16,7 +16,7 @@ order processing, with both frontend and backend components.
 ✅ **Bootstrap**<br/>
 ✅ **Blades**<br/>
 
-# 🔥 BackEnd
+### 🔥 BackEnd
 
 ✅ **Laravel**<br/>
 ✅ **MySQL**<br/>
