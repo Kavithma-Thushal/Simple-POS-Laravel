@@ -135,7 +135,7 @@
                 },
                 error: function (error) {
                     getAllCustomers();
-                    console.error(error.responseJSON.message);
+                    alert(error.responseJSON.message);
                 }
             });
         });
@@ -188,6 +188,7 @@
                             <td>${address}</td>
                             <td>${salary}</td>
                         </tr>`;
+
                         $("#customerTable").append(row);
                     });
                     customerCount();
@@ -196,7 +197,6 @@
                     clearCustomerInputs();
                     console.log(response.message);
                 },
-
                 error: function (error) {
                     console.log(error.responseJSON.message);
                 }
@@ -257,7 +257,7 @@
                 method: "GET",
                 success: function (response) {
                     $("#customerCount").text(response.data);
-                    console.log(response.data);
+                    console.log(response.message);
                 },
                 error: function (error) {
                     console.log(error.responseJSON.message);
