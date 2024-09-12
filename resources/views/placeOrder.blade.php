@@ -14,7 +14,7 @@
                 <div class="mb-2">
                     <label for="txtPlaceOrderCustomerId" class="form-label fw-bold">Customer ID</label>
                     <select class="form-control" id="txtPlaceOrderCustomerId"
-                            onchange="loadCustomerDetailsToInputs()"></select>
+                            onchange="getCustomerDetailsToInputs()"></select>
                 </div>
                 <div class="mb-2">
                     <label for="txtPlaceOrderCustomerName" class="form-label fw-bold">Customer Name</label>
@@ -39,7 +39,7 @@
                 <div class="mb-2">
                     <label for="txtPlaceOrderItemCode" class="form-label fw-bold">Item Code</label>
                     <select class="form-control" id="txtPlaceOrderItemCode"
-                            onchange="loadItemDetailsToInputs()"></select>
+                            onchange="getItemDetailsToInputs()"></select>
                 </div>
                 <div class="mb-2">
                     <label for="txtPlaceOrderItemDescription" class="form-label fw-bold">Item
@@ -104,10 +104,10 @@
 </main>
 <script>
     getAllCustomersToCombo();
-    loadCustomerDetailsToInputs();
+    getCustomerDetailsToInputs();
 
     getAllItemsToCombo();
-    loadItemDetailsToInputs();
+    getItemDetailsToInputs();
 
     function getAllCustomersToCombo() {
         $.ajax({
@@ -141,7 +141,7 @@
         });
     }
 
-    function loadCustomerDetailsToInputs() {
+    function getCustomerDetailsToInputs() {
         $.ajax({
             url: '{{ route('search-customer') }}',
             method: "GET",
@@ -189,7 +189,7 @@
         });
     }
 
-    function loadItemDetailsToInputs() {
+    function getItemDetailsToInputs() {
         $.ajax({
             url: '{{ route('search-item') }}',
             method: "GET",
