@@ -194,7 +194,6 @@
                     generateCustomerId();
                     customerTableListener();
                     clearCustomerInputs();
-                    console.log(response.message);
                 },
                 error: function (error) {
                     console.log(error.responseJSON.message);
