@@ -9,7 +9,7 @@
                 <h3 class="text-center mb-4">Customer Details</h3>
                 <div class="mb-2">
                     <label for="txtPlaceOrderOrderId" class="form-label fw-bold">Order ID</label>
-                    <input class="form-control" id="txtPlaceOrderOrderId" type="text" disabled>
+                    <input class="form-control" id="txtPlaceOrderOrderId" type="text" readonly>
                 </div>
                 <div class="mb-2">
                     <label for="txtPlaceOrderCustomerId" class="form-label fw-bold">Customer ID</label>
@@ -102,3 +102,55 @@
     </div>
 
 </main>
+<script>
+    loadCustomerDetailsToInputs();
+    getAllCustomersToCombo();
+
+    function getAllCustomersToCombo() {
+        $.ajax({
+            url: '{{ route('get-all-customers') }}',
+            method: "GET",
+            success: function (response) {
+                let cmbCustomerId = $("#txtPlaceOrderCustomerId");
+                cmbCustomerId.empty();
+
+                // Add Disabled Option
+                cmbCustomerId.append(
+                    $("<option></option>")
+                        .attr("value", "")
+                        .attr("disabled", "disabled")
+                        .attr("selected", "selected")
+                        .text("Select a Customer ID")
+                );
+
+                // Add customer ID
+                response.forEach(customer => {
+                    let option = $("<option></option>")
+                        .attr("value", customer.id)
+                        .text(customer.id);
+                    cmbCustomerId.append(option);
+                });
+
+            },
+            error: function (error) {
+                console.log(error.responseJSON.message);
+            }
+        });
+    }
+
+    function loadCustomerDetailsToInputs() {
+        $.ajax({
+            url: '{{ route('search-customer') }}',
+            method: "GET",
+            data: {id: $("#txtPlaceOrderCustomerId").val()},
+            success: function (response) {
+                $("#txtPlaceOrderCustomerName").val(response.data.name);
+                $("#txtPlaceOrderCustomerAddress").val(response.data.address);
+                $("#txtPlaceOrderCustomerSalary").val(response.data.salary);
+            },
+            error: function (error) {
+                console.log(error.responseJSON.message);
+            }
+        });
+    }
+</script>

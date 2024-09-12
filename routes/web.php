@@ -31,5 +31,8 @@ Route::controller(ItemController::class)->group(function () {
     Route::get('/item-count-route', 'itemCount')->name('item-count');
 });
 
-Route::get('/view-place-order-route', [PlaceOrderController::class, 'viewPlaceOrder'])->name('view-place-order');
+Route::controller(PlaceOrderController::class)->group(function () {
+    Route::get('/view-place-order-route', 'viewPlaceOrder')->name('view-place-order');
+});
+
 Route::get('/view-order-details-route', [OrderDetailsController::class, 'viewOrderDetails'])->name('view-order-details');
