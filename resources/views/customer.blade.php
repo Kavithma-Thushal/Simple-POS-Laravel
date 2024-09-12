@@ -57,7 +57,7 @@
                     </button>
                     <button class="btn btn-outline-danger mx-2 w-100" id="btnDeleteCustomer" type="button">Delete
                     </button>
-                    <button class="btn btn-outline-secondary mx-2 w-100" id="btnGetAllCustomers" type="button">Load
+                    <button class="btn btn-outline-secondary mx-2 w-100" id="btnGetAllCustomers" type="button">Get
                         All
                     </button>
                     <button class="btn btn-outline-info mx-2 w-100" id="btnResetCustomer" type="reset">Reset</button>
