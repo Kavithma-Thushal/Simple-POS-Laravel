@@ -103,8 +103,11 @@
 
 </main>
 <script>
-    loadCustomerDetailsToInputs();
     getAllCustomersToCombo();
+    loadCustomerDetailsToInputs();
+
+    getAllItemsToCombo();
+    loadItemDetailsToInputs();
 
     function getAllCustomersToCombo() {
         $.ajax({
@@ -147,6 +150,54 @@
                 $("#txtPlaceOrderCustomerName").val(response.data.name);
                 $("#txtPlaceOrderCustomerAddress").val(response.data.address);
                 $("#txtPlaceOrderCustomerSalary").val(response.data.salary);
+            },
+            error: function (error) {
+                console.log(error.responseJSON.message);
+            }
+        });
+    }
+
+    function getAllItemsToCombo() {
+        $.ajax({
+            url: '{{ route('get-all-items') }}',
+            method: "GET",
+            success: function (response) {
+                let cmbItemCode = $("#txtPlaceOrderItemCode");
+                cmbItemCode.empty();
+
+                // Add Disabled Option
+                cmbItemCode.append(
+                    $("<option></option>")
+                        .attr("value", "")
+                        .attr("disabled", "disabled")
+                        .attr("selected", "selected")
+                        .text("Select an Item Code")
+                );
+
+                // Add Item Code
+                response.forEach(item => {
+                    let option = $("<option></option>")
+                        .attr("value", item.code)
+                        .text(item.code);
+                    cmbItemCode.append(option);
+                });
+
+            },
+            error: function (error) {
+                console.log(error.responseJSON.message);
+            }
+        });
+    }
+
+    function loadItemDetailsToInputs() {
+        $.ajax({
+            url: '{{ route('search-item') }}',
+            method: "GET",
+            data: {id: $("#txtPlaceOrderItemCode").val()},
+            success: function (res) {
+                $("#txtPlaceOrderItemDescription").val(res.data.description);
+                $("#txtPlaceOrderItemUnitPrice").val(res.data.unitPrice);
+                $("#txtPlaceOrderItemQtyOnHand").val(res.data.qtyOnHand);
             },
             error: function (error) {
                 console.log(error.responseJSON.message);
