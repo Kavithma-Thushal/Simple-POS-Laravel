@@ -104,10 +104,7 @@
 </main>
 <script>
     getAllCustomersToCombo();
-    getCustomerDetailsToInputs();
-
     getAllItemsToCombo();
-    getItemDetailsToInputs();
 
     function getAllCustomersToCombo() {
         $.ajax({
