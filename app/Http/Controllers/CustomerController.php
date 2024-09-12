@@ -83,19 +83,12 @@ class CustomerController extends Controller
             $lastCustomerId = "C00-000";
         }
 
-        return response()->json([
-            'data' => $lastCustomerId,
-            'message' => 'Last customer ID Retrieved Successfully...!'
-        ]);
+        return response()->json(['data' => $lastCustomerId]);
     }
 
     public function customerCount()
     {
         $totalCustomers = Customer::count();
-
-        return response()->json([
-            'data' => $totalCustomers,
-            'message' => 'Total Customer Count Retrieved Successfully...!'
-        ]);
+        return response()->json(['data' => $totalCustomers]);
     }
 }

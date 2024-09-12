@@ -112,7 +112,6 @@
                 </tr>`;
 
                     $("#customerTable").append(row);
-                    console.log(response.message);
                 },
                 error: function (error) {
                     getAllCustomers();
@@ -203,6 +202,19 @@
             });
         }
 
+        function customerCount() {
+            $.ajax({
+                url: '{{ route('customer-count') }}',
+                method: "GET",
+                success: function (response) {
+                    $("#customerCount").text(response.data);
+                },
+                error: function (error) {
+                    console.log(error.responseJSON.message);
+                }
+            });
+        }
+
         function generateCustomerId() {
             $.ajax({
                 url: '{{ route('generate-customer-id') }}',
@@ -214,7 +226,6 @@
                     let number = parseInt(parts[1]) + 1;
                     let newCustomerId = prefix + '-' + number.toString().padStart(3, '0');
                     $("#txtCustomerId").val(newCustomerId);
-                    console.log(response.message);
                 },
                 error: function (error) {
                     console.log(error.responseJSON.message);
@@ -249,20 +260,6 @@
             $("#btnSaveCustomer").prop("disabled", false);
             $("#btnUpdateCustomer").prop("disabled", true);
             $("#btnDeleteCustomer").prop("disabled", true);
-        }
-
-        function customerCount() {
-            $.ajax({
-                url: '{{ route('customer-count') }}',
-                method: "GET",
-                success: function (response) {
-                    $("#customerCount").text(response.data);
-                    console.log(response.message);
-                },
-                error: function (error) {
-                    console.log(error.responseJSON.message);
-                }
-            });
         }
     });
 </script>
