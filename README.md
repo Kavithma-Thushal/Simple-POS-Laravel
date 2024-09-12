@@ -28,6 +28,28 @@ order processing, with both frontend and backend components.
 ✅ Place Orders<br/>
 ✅ View Order Details<br/>
 
+## 📸 Screenshots
+
+### Dashboard
+
+<img src="ss/dashboard.png">
+
+### Customer Management
+
+<img src="ss/customer_management.png">
+
+### Item Management
+
+<img src="ss/item_management.png">
+
+### Place Order
+
+<img src="ss/place_order.png">
+
+### Order Details
+
+<img src="ss/order_details.png">
+
 ## 📝 Version
 
 **1.0.0**
