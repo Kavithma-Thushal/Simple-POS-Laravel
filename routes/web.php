@@ -20,6 +20,16 @@ Route::controller(CustomerController::class)->group(function () {
     Route::get('/customer-count-route', 'customerCount')->name('customer-count');
 });
 
-Route::get('/view-item-route', [ItemController::class, 'viewItem'])->name('view-item');
+Route::controller(ItemController::class)->group(function () {
+    Route::get('/view-item-route', 'viewItem')->name('view-item');
+    Route::post('/save-item-route', 'saveItem')->name('save-item');
+    Route::get('/search-item-route', 'searchItem')->name('search-item');
+    Route::put('/update-item-route', 'updateItem')->name('update-item');
+    Route::delete('/delete-item-route', 'deleteItem')->name('delete-item');
+    Route::get('/get-all-items-route', 'getAllItems')->name('get-all-items');
+    Route::get('/generate-item-code-route', 'generateItemCode')->name('generate-item-code');
+    Route::get('/item-count-route', 'itemCount')->name('item-count');
+});
+
 Route::get('/view-place-order-route', [PlaceOrderController::class, 'viewPlaceOrder'])->name('view-place-order');
 Route::get('/view-order-details-route', [OrderDetailsController::class, 'viewOrderDetails'])->name('view-order-details');
