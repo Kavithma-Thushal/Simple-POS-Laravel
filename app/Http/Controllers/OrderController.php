@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 
-class PlaceOrderController extends Controller
+class OrderController extends Controller
 {
     public function viewPlaceOrder()
     {
-        return view('placeOrder');
+        return view('order');
     }
 
     public function generateOrderId()

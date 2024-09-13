@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\PlaceOrderController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailsController;
 
 Route::get('/', [DashboardController::class, 'viewDashboard'])->name('view-dashboard');
@@ -31,7 +31,7 @@ Route::controller(ItemController::class)->group(function () {
     Route::get('/item-count-route', 'itemCount')->name('item-count');
 });
 
-Route::controller(PlaceOrderController::class)->group(function () {
+Route::controller(OrderController::class)->group(function () {
     Route::get('/view-place-order-route', 'viewPlaceOrder')->name('view-place-order');
     Route::get('/generate-order-id-route', 'generateOrderId')->name('generate-order-id');
 });
