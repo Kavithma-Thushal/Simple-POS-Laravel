@@ -7,7 +7,9 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailsController;
 
-Route::get('/', [DashboardController::class, 'viewDashboard'])->name('view-dashboard');
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/', 'viewDashboard')->name('view-dashboard');
+});
 
 Route::controller(CustomerController::class)->group(function () {
     Route::get('/view-customer-route', 'viewCustomer')->name('view-customer');
@@ -36,4 +38,6 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/generate-order-id-route', 'generateOrderId')->name('generate-order-id');
 });
 
-Route::get('/view-order-details-route', [OrderDetailsController::class, 'viewOrderDetails'])->name('view-order-details');
+Route::controller(OrderDetailsController::class)->group(function () {
+    Route::get('/view-order-details-route', 'viewOrderDetails')->name('view-order-details');
+});
