@@ -187,23 +187,9 @@
 
                         $("#itemTable").append(row);
                     });
-                    itemCount();
                     generateItemCode();
                     itemTableListener();
                     clearItemInputs();
-                },
-                error: function (error) {
-                    console.log(error.responseJSON.message);
-                }
-            });
-        }
-
-        function itemCount() {
-            $.ajax({
-                url: '{{ route('item-count') }}',
-                method: "GET",
-                success: function (response) {
-                    $("#itemCount").text(response.data);
                 },
                 error: function (error) {
                     console.log(error.responseJSON.message);

@@ -14,7 +14,8 @@
         <div class="navbar-collapse justify-content-center">
             <ul class="navbar-nav">
                 <li class="nav-item mx-3">
-                    <a class="nav-link" href="#" id="dashboardLink">Dashboard</a>
+                    <a class="nav-link" href="#" id="dashboardLink"
+                       onclick="getCustomerCount(); getItemCount(); return false;">Dashboard</a>
                 </li>
                 <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="customerLink">Customer</a>
@@ -72,49 +73,75 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
-    $(document).ready(function () {
+    getCustomerCount();
+    getItemCount();
 
-        let dashboard = $('#dashboardSection').html();
+    let dashboard = $('#dashboardSection').html();
 
-        function loadContent(route) {
-            if (route === "{{ route('view-dashboard') }}") {
-                $('#dashboardSection').html(dashboard);
-            } else {
-                $.ajax({
-                    url: route,
-                    type: 'GET',
-                    success: function (data) {
-                        $('#dashboardSection').html(data);
-                    }
-                });
-            }
+    function loadContent(route) {
+        if (route === "{{ route('view-dashboard') }}") {
+            $('#dashboardSection').html(dashboard);
+        } else {
+            $.ajax({
+                url: route,
+                type: 'GET',
+                success: function (data) {
+                    $('#dashboardSection').html(data);
+                }
+            });
         }
+    }
 
-        $('#dashboardLink').on('click', function (e) {
-            e.preventDefault();
-            loadContent("{{ route('view-dashboard') }}");
-        });
-
-        $('#customerLink').on('click', function (e) {
-            e.preventDefault();
-            loadContent("{{ route('view-customer') }}");
-        });
-
-        $('#itemLink').on('click', function (e) {
-            e.preventDefault();
-            loadContent("{{ route('view-item') }}");
-        });
-
-        $('#orderLink').on('click', function (e) {
-            e.preventDefault();
-            loadContent("{{ route('view-order') }}");
-        });
-
-        $('#orderDetailsLink').on('click', function (e) {
-            e.preventDefault();
-            loadContent("{{ route('view-order-details') }}");
-        });
+    $('#dashboardLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('view-dashboard') }}");
     });
+
+    $('#customerLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('view-customer') }}");
+    });
+
+    $('#itemLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('view-item') }}");
+    });
+
+    $('#orderLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('view-order') }}");
+    });
+
+    $('#orderDetailsLink').on('click', function (e) {
+        e.preventDefault();
+        loadContent("{{ route('view-order-details') }}");
+    });
+
+    function getCustomerCount() {
+        $.ajax({
+            url: '{{ route('customer-count') }}',
+            method: "GET",
+            success: function (response) {
+                $("#customerCount").text(response.data);
+            },
+            error: function (error) {
+                console.log(error.responseJSON.message);
+            }
+        });
+    }
+
+    function getItemCount() {
+        $.ajax({
+            url: '{{ route('item-count') }}',
+            method: "GET",
+            success: function (response) {
+                $("#itemCount").text(response.data);
+            },
+            error: function (error) {
+                console.log(error.responseJSON.message);
+            }
+        });
+    }
 </script>
 </body>
 </html>

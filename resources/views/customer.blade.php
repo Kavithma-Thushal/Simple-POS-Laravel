@@ -190,23 +190,9 @@
 
                         $("#customerTable").append(row);
                     });
-                    customerCount();
                     generateCustomerId();
                     customerTableListener();
                     clearCustomerInputs();
-                },
-                error: function (error) {
-                    console.log(error.responseJSON.message);
-                }
-            });
-        }
-
-        function customerCount() {
-            $.ajax({
-                url: '{{ route('customer-count') }}',
-                method: "GET",
-                success: function (response) {
-                    $("#customerCount").text(response.data);
                 },
                 error: function (error) {
                     console.log(error.responseJSON.message);
