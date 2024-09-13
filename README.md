@@ -32,23 +32,23 @@ order processing, with both frontend and backend components.
 
 ### Dashboard
 
-<img src="ss/dashboard.png">
+<img src="public/assets/ss/dashboard.png">
 
 ### Customer Management
 
-<img src="ss/customer_management.png">
+<img src="public/assets/ss/customer_management.png">
 
 ### Item Management
 
-<img src="ss/item_management.png">
+<img src="public/assets/ss/item_management.png">
 
 ### Place Order
 
-<img src="ss/place_order.png">
+<img src="public/assets/ss/place_order.png">
 
 ### Order Details
 
-<img src="ss/order_details.png">
+<img src="public/assets/ss/order_details.png">
 
 ## 📝 Version
 
