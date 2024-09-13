@@ -10,6 +10,12 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->string('orderId')->primary();
             $table->string('customerId');
+
+            // Add foreign key constraint
+            $table->foreign('customerId')
+                ->references('id')
+                ->on('customers')
+                ->onDelete('cascade');
         });
     }
 

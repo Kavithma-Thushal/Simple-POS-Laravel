@@ -23,4 +23,10 @@ class Customer extends Model
 
     // Timestamps are not required if you're not using created_at and updated_at
     public $timestamps = false;
+
+    // One-to-Many relationship: A customer has many orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'customerId', 'id');
+    }
 }

@@ -23,4 +23,10 @@ class Order extends Model
 
     // Timestamps are not required if you're not using created_at and updated_at
     public $timestamps = false;
+
+    // Many-to-One relationship: An order belongs to a customer
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customerId', 'id');
+    }
 }
