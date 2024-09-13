@@ -36,6 +36,7 @@ Route::controller(ItemController::class)->group(function () {
 Route::controller(OrderController::class)->group(function () {
     Route::get('/view-order-route', 'viewOrder')->name('view-order');
     Route::get('/generate-order-id-route', 'generateOrderId')->name('generate-order-id');
+    Route::get('/order-count-route', 'getOrderCount')->name('order-count');
 });
 
 Route::controller(OrderDetailsController::class)->group(function () {

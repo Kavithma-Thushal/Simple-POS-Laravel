@@ -21,4 +21,10 @@ class OrderController extends Controller
 
         return response()->json(['data' => $lastCustomerId]);
     }
+
+    public function getOrderCount()
+    {
+        $totalOrders = Order::count();
+        return response()->json(['data' => $totalOrders]);
+    }
 }

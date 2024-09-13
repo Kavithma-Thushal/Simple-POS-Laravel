@@ -15,7 +15,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="dashboardLink"
-                       onclick="getCustomerCount(); getItemCount(); return false;">Dashboard</a>
+                       onclick="getCustomerCount(); getItemCount(); getOrderCount(); return false;">Dashboard</a>
                 </li>
                 <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="customerLink">Customer</a>
@@ -75,6 +75,7 @@
 <script>
     getCustomerCount();
     getItemCount();
+    getOrderCount();
 
     let dashboard = $('#dashboardSection').html();
 
@@ -136,6 +137,19 @@
             method: "GET",
             success: function (response) {
                 $("#itemCount").text(response.data);
+            },
+            error: function (error) {
+                console.log(error.responseJSON.message);
+            }
+        });
+    }
+
+    function getOrderCount() {
+        $.ajax({
+            url: '{{ route('order-count') }}',
+            method: "GET",
+            success: function (response) {
+                $("#orderCount").text(response.data);
             },
             error: function (error) {
                 console.log(error.responseJSON.message);
