@@ -6,7 +6,7 @@ use App\Models\Customer;
 
 class OrderController extends Controller
 {
-    public function viewPlaceOrder()
+    public function viewOrder()
     {
         return view('order');
     }

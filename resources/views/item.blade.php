@@ -1,4 +1,4 @@
-<main id="itemSection">
+<main>
     <h1 class="text-center fw-bold m-4">Item Management</h1>
 
     <div class="row">

@@ -14,7 +14,7 @@
         <div class="navbar-collapse justify-content-center">
             <ul class="navbar-nav">
                 <li class="nav-item mx-3">
-                    <a class="nav-link" href="#" id="homeLink">Home</a>
+                    <a class="nav-link" href="#" id="dashboardLink">Dashboard</a>
                 </li>
                 <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="customerLink">Customer</a>
@@ -23,7 +23,7 @@
                     <a class="nav-link" href="#" id="itemLink">Item</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a class="nav-link" href="#" id="placeOrderLink">Place Order</a>
+                    <a class="nav-link" href="#" id="orderLink">Orders</a>
                 </li>
                 <li class="nav-item mx-3">
                     <a class="nav-link" href="#" id="orderDetailsLink">Order Details</a>
@@ -90,7 +90,7 @@
             }
         }
 
-        $('#homeLink').on('click', function (e) {
+        $('#dashboardLink').on('click', function (e) {
             e.preventDefault();
             loadContent("{{ route('view-dashboard') }}");
         });
@@ -105,9 +105,9 @@
             loadContent("{{ route('view-item') }}");
         });
 
-        $('#placeOrderLink').on('click', function (e) {
+        $('#orderLink').on('click', function (e) {
             e.preventDefault();
-            loadContent("{{ route('view-place-order') }}");
+            loadContent("{{ route('view-order') }}");
         });
 
         $('#orderDetailsLink').on('click', function (e) {

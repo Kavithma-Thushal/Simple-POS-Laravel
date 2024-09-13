@@ -1,5 +1,5 @@
-<main id="placeOrderSection">
-    <h1 class="text-center fw-bold mt-4">Place Order</h1>
+<main>
+    <h1 class="text-center fw-bold mt-4">Order Management</h1>
 
     <div class="row justify-content-center">
 

@@ -1,4 +1,4 @@
-<main id="orderDetailsSection">
+<main>
     <h1 class="text-center fw-bold mt-4">Order Details</h1>
 
     <div class="row justify-content-center">

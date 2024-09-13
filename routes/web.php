@@ -32,7 +32,7 @@ Route::controller(ItemController::class)->group(function () {
 });
 
 Route::controller(OrderController::class)->group(function () {
-    Route::get('/view-place-order-route', 'viewPlaceOrder')->name('view-place-order');
+    Route::get('/view-order-route', 'viewOrder')->name('view-order');
     Route::get('/generate-order-id-route', 'generateOrderId')->name('generate-order-id');
 });
 
