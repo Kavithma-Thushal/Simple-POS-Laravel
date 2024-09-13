@@ -1,9 +1,15 @@
 {
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "name": "simple/pos",
+    "version": "1.0.0",
+    "description": "Simple POS Implemented Using Laravel",
+    "keywords": [
+        "laravel",
+        "framework",
+        "pos"
+    ],
+    "author": "Kavithma Thushal",
     "license": "MIT",
+    "private": true,
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.9",

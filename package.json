@@ -1,6 +1,10 @@
 {
+    "name": "simple_pos_laravel",
+    "version": "1.0.0",
+    "description": "Simple POS Implemented Using Laravel",
+    "author": "Kavithma Thushal",
+    "license": "MIT",
     "private": true,
-    "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build"
