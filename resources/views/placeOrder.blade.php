@@ -103,8 +103,30 @@
 
 </main>
 <script>
+    generateOrderId();
     getAllCustomersToCombo();
     getAllItemsToCombo();
+
+    function generateOrderId() {
+        $.ajax({
+            url: '{{ route('generate-order-id') }}',
+            method: "GET",
+            success: function (response) {
+                let lastOrderId = response.data;
+
+                // Split and generate new id
+                let parts = lastOrderId.split('-');
+                let prefix = parts[0];
+                let number = parseInt(parts[1]) + 1;
+                let newOrderId = prefix + '-' + number.toString().padStart(3, '0');
+
+                $("#txtPlaceOrderOrderId").val(newOrderId);
+            },
+            error: function (error) {
+                console.log(error.responseJSON.message);
+            }
+        });
+    }
 
     function getAllCustomersToCombo() {
         $.ajax({
