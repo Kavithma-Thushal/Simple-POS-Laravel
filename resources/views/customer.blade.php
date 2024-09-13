@@ -220,6 +220,8 @@
                 method: "GET",
                 success: function (response) {
                     let lastCustomerId = response.data;
+
+                    // Split and generate new id
                     let parts = lastCustomerId.split('-');
                     let prefix = parts[0];
                     let number = parseInt(parts[1]) + 1;

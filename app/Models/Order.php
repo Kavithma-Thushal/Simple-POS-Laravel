@@ -10,7 +10,7 @@ class Order extends Model
     protected $table = 'orders';
 
     // Define the primary key for the table
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'orderId';
 
     // Indicate that the primary key is not auto-incrementing
     public $incrementing = false;

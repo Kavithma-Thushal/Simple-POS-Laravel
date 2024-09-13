@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -13,7 +13,7 @@ class OrderController extends Controller
 
     public function generateOrderId()
     {
-        $lastCustomerId = Customer::orderBy('id', 'desc')->value('id');
+        $lastCustomerId = Order::orderBy('orderId', 'desc')->value('orderId');
 
         if (!$lastCustomerId) {
             $lastCustomerId = "ORD-000";

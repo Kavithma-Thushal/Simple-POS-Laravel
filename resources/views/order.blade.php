@@ -119,7 +119,6 @@
                 let prefix = parts[0];
                 let number = parseInt(parts[1]) + 1;
                 let newOrderId = prefix + '-' + number.toString().padStart(3, '0');
-
                 $("#txtPlaceOrderOrderId").val(newOrderId);
             },
             error: function (error) {
