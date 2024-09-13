@@ -19,7 +19,7 @@ Route::controller(CustomerController::class)->group(function () {
     Route::delete('/delete-customer-route', 'deleteCustomer')->name('delete-customer');
     Route::get('/get-all-customers-route', 'getAllCustomers')->name('get-all-customers');
     Route::get('/generate-customer-id-route', 'generateCustomerId')->name('generate-customer-id');
-    Route::get('/customer-count-route', 'customerCount')->name('customer-count');
+    Route::get('/customer-count-route', 'getCustomerCount')->name('customer-count');
 });
 
 Route::controller(ItemController::class)->group(function () {
@@ -30,7 +30,7 @@ Route::controller(ItemController::class)->group(function () {
     Route::delete('/delete-item-route', 'deleteItem')->name('delete-item');
     Route::get('/get-all-items-route', 'getAllItems')->name('get-all-items');
     Route::get('/generate-item-code-route', 'generateItemCode')->name('generate-item-code');
-    Route::get('/item-count-route', 'itemCount')->name('item-count');
+    Route::get('/item-count-route', 'getItemCount')->name('item-count');
 });
 
 Route::controller(OrderController::class)->group(function () {

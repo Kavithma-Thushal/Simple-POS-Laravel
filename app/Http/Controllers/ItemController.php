@@ -86,7 +86,7 @@ class ItemController extends Controller
         return response()->json(['data' => $lastItemCode]);
     }
 
-    public function itemCount()
+    public function getItemCount()
     {
         $totalItems = Item::count();
         return response()->json(['data' => $totalItems]);

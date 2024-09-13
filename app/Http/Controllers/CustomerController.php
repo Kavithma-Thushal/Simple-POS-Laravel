@@ -86,7 +86,7 @@ class CustomerController extends Controller
         return response()->json(['data' => $lastCustomerId]);
     }
 
-    public function customerCount()
+    public function getCustomerCount()
     {
         $totalCustomers = Customer::count();
         return response()->json(['data' => $totalCustomers]);
