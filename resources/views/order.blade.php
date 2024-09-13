@@ -144,7 +144,7 @@
                         .text("Select a Customer ID")
                 );
 
-                // Add customer ID
+                // Add Customer ID
                 response.forEach(customer => {
                     let option = $("<option></option>")
                         .attr("value", customer.id)
