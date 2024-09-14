@@ -22,8 +22,8 @@ class OrderController extends Controller
             'customerId' => 'required|string',
             'orderDetailsList' => 'required|array',
             'orderDetailsList.*.itemCode' => 'required|string',
-            'orderDetailsList.*.buyQty' => 'required|string',
-            'orderDetailsList.*.total' => 'required|string',
+            'orderDetailsList.*.buyQty' => 'required|integer',
+            'orderDetailsList.*.total' => 'required|numeric',
         ]);
 
         // Check if the OrderId already exists

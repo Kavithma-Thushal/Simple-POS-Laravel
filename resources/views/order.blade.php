@@ -103,6 +103,7 @@
 
 </main>
 <script>
+    let cart = [];
     generateOrderId();
     getAllCustomersToCombo();
     getAllItemsToCombo();
@@ -222,4 +223,99 @@
             }
         });
     }
+
+    $("#btnAddToCart").click(function () {
+
+        let customerId = $("#txtPlaceOrderCustomerId").val();
+        let itemCode = $("#txtPlaceOrderItemCode").val();
+        let itemDescription = $("#txtPlaceOrderItemDescription").val();
+        let unitPrice = parseFloat($("#txtPlaceOrderItemUnitPrice").val());
+        let buyQty = parseInt($("#txtPlaceOrderBuyQty").val());
+        let total = buyQty * unitPrice;
+
+        if (!itemCode || !itemDescription || isNaN(unitPrice) || isNaN(buyQty) || !customerId) {
+            alert("Please fill all item details correctly");
+            return;
+        }
+
+        let existingItem = cart.find(item => item.itemCode === itemCode && item.customerId === customerId);
+        if (existingItem) {
+            existingItem.buyQty += buyQty;
+            existingItem.total = existingItem.buyQty * existingItem.unitPrice;
+        } else {
+            cart.push({
+                customerId: customerId,
+                itemCode: itemCode,
+                itemDescription: itemDescription,
+                unitPrice: unitPrice,
+                buyQty: buyQty,
+                total: total
+            });
+        }
+
+        updateCartTable();
+    });
+
+    function updateCartTable(itemCode = null, customerId = null) {
+        if (itemCode && customerId) {
+            cart = cart.filter(item => item.itemCode !== itemCode || item.customerId !== customerId);
+        }
+
+        let tableBody = $("#orderTable");
+        tableBody.empty();
+
+        let total = 0;
+        cart.forEach(item => {
+            let row = `<tr>
+            <td>${item.customerId}</td>
+            <td>${item.itemDescription}</td>
+            <td>${item.unitPrice.toFixed(2)}</td>
+            <td>${item.buyQty}</td>
+            <td>${item.total.toFixed(2)}</td>
+            <td><button class="btn btn-outline-danger btn-sm" onclick="updateCartTable('${item.itemCode}', '${item.customerId}')">Remove</button></td>
+        </tr>`;
+            tableBody.append(row);
+            total += item.total;
+        });
+
+        $("#txtPlaceOrderTotal").val(total);
+    }
+
+    $("#btnPlaceOrder").click(function () {
+
+        let orderId = $("#txtPlaceOrderOrderId").val();
+        let customerId = $("#txtPlaceOrderCustomerId").val();
+
+        if (!orderId || !customerId || cart.length === 0) {
+            alert("Please fill all fields and add items to the cart");
+            return;
+        }
+
+        let orderObj = {
+            orderId: orderId,
+            customerId: customerId,
+            orderDetailsList: cart.map(item => ({
+                itemCode: item.itemCode,
+                buyQty: item.buyQty,
+                total: item.total
+            }))
+        };
+
+        $.ajax({
+            url: '{{ route('place-order') }}',
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(orderObj),
+            success: function (res) {
+                cart = [];  // Clear cart after successful order
+                updateCartTable();
+                getOrderCount();
+                generateOrderId();
+                alert(res.message);
+            },
+            error: function (error) {
+                alert(error.responseJSON.message);
+            }
+        });
+    });
 </script>
