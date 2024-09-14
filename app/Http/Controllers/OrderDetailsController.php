@@ -6,6 +6,6 @@ class OrderDetailsController extends Controller
 {
     public function viewOrderDetails()
     {
-        return view('orderDetails');
+        return view('order_details');
     }
 }
