@@ -15,23 +15,6 @@ class OrderController extends Controller
         return view('order');
     }
 
-    public function generateOrderId()
-    {
-        $lastCustomerId = Order::orderBy('orderId', 'desc')->value('orderId');
-
-        if (!$lastCustomerId) {
-            $lastCustomerId = "ORD-000";
-        }
-
-        return response()->json(['data' => $lastCustomerId]);
-    }
-
-    public function getOrderCount()
-    {
-        $totalOrders = Order::count();
-        return response()->json(['data' => $totalOrders]);
-    }
-
     public function placeOrder(Request $request)
     {
         $request->validate([
@@ -97,5 +80,22 @@ class OrderController extends Controller
         return response()->json([
             'message' => 'Order Placed Successfully...!'
         ], 200);
+    }
+
+    public function generateOrderId()
+    {
+        $lastCustomerId = Order::orderBy('orderId', 'desc')->value('orderId');
+
+        if (!$lastCustomerId) {
+            $lastCustomerId = "ORD-000";
+        }
+
+        return response()->json(['data' => $lastCustomerId]);
+    }
+
+    public function getOrderCount()
+    {
+        $totalOrders = Order::count();
+        return response()->json(['data' => $totalOrders]);
     }
 }
