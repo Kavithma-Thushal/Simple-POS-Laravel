@@ -29,4 +29,11 @@ class Order extends Model
     {
         return $this->belongsTo(Customer::class, 'customerId', 'id');
     }
+
+    // Many-to-Many relationship: An order has many items
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'order_details', 'orderId', 'itemCode')
+            ->withPivot('buyQty', 'total');
+    }
 }

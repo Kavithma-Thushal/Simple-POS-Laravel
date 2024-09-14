@@ -23,4 +23,11 @@ class Item extends Model
 
     // Timestamps are not required if you're not using created_at and updated_at
     public $timestamps = false;
+
+    // Many-to-Many relationship: An item belongs to many orders
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_details', 'itemCode', 'orderId')
+            ->withPivot('buyQty', 'total');
+    }
 }

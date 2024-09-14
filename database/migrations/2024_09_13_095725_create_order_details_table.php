@@ -8,10 +8,17 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('order_details', function (Blueprint $table) {
-            $table->string('orderId')->primary();
+            $table->string('orderId');
             $table->string('itemCode');
             $table->integer('buyQty');
             $table->decimal('total', 10, 2);
+
+            // Composite primary key
+            $table->primary(['orderId', 'itemCode']);
+
+            // Foreign key constraints
+            $table->foreign('orderId')->references('orderId')->on('orders')->onDelete('cascade');
+            $table->foreign('itemCode')->references('code')->on('items')->onDelete('cascade');
         });
     }
 
