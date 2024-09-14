@@ -34,14 +34,13 @@ class OrderController extends Controller
 
     public function placeOrder(Request $request)
     {
-        // Validate the incoming request
         $request->validate([
             'orderId' => 'required|string',
             'customerId' => 'required|string',
             'orderDetailsList' => 'required|array',
             'orderDetailsList.*.itemCode' => 'required|string',
-            'orderDetailsList.*.buyQty' => 'required|string',  // Accept string as buyQty
-            'orderDetailsList.*.total' => 'required|string',   // Accept string as total
+            'orderDetailsList.*.buyQty' => 'required|string',
+            'orderDetailsList.*.total' => 'required|string',
         ]);
 
         // Check if the OrderId already exists
@@ -87,7 +86,7 @@ class OrderController extends Controller
             $orderDetailEntry->orderId = $order->orderId;
             $orderDetailEntry->itemCode = $item->code;
             $orderDetailEntry->buyQty = $buyQty;
-            $orderDetailEntry->total = $item->unitPrice * $buyQty;  // Recalculate total based on actual price
+            $orderDetailEntry->total = $item->unitPrice * $buyQty;
             $orderDetailEntry->save();
 
             // Update Item Quantity
