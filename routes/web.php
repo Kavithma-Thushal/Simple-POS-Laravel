@@ -42,4 +42,5 @@ Route::controller(OrderController::class)->group(function () {
 
 Route::controller(OrderDetailsController::class)->group(function () {
     Route::get('/view-order-details-route', 'viewOrderDetails')->name('view-order-details');
+    Route::get('/get-order-details-route', 'getOrderDetails')->name('get-order-details');
 });

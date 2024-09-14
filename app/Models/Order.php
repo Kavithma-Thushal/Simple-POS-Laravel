@@ -30,7 +30,13 @@ class Order extends Model
         return $this->belongsTo(Customer::class, 'customerId', 'id');
     }
 
-    // Many-to-Many relationship: An order has many items
+    // One-to-Many relationship: An order has many order details
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetails::class, 'orderId', 'orderId');
+    }
+
+    // Many-to-Many relationship: An order has many items through order_details
     public function items()
     {
         return $this->belongsToMany(Item::class, 'order_details', 'orderId', 'itemCode')

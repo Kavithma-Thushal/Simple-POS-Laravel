@@ -18,3 +18,36 @@
         </div>
     </div>
 </main>
+
+<script>
+    $(document).ready(function () {
+        loadOrderDetails();
+
+        function loadOrderDetails() {
+            $.ajax({
+                url: '{{ route('get-order-details') }}',
+                method: 'GET',
+                success: function (res) {
+                    const tableBody = $('#orderDetailsTable');
+                    tableBody.empty();
+
+                    res.data.forEach(function (orderDetail) {
+                        orderDetail.orderDetailsList.forEach(function (detail) {
+                            let row = `<tr>
+                                    <td>${orderDetail.orderId}</td>
+                                    <td>${orderDetail.customerId}</td>
+                                    <td>${detail.itemCode}</td>
+                                    <td>${detail.buyQty}</td>
+                                    <td>${detail.total}</td>
+                                </tr>`;
+                            tableBody.append(row);
+                        });
+                    });
+                },
+                error: function (error) {
+                    console.log(error.responseJSON.message);
+                }
+            });
+        }
+    });
+</script>
