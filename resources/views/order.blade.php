@@ -63,7 +63,7 @@
                 <h3 class="text-center mb-4">Payment Details</h3>
                 <div class="mb-2">
                     <label for="txtPlaceOrderBuyQty" class="form-label fw-bold">Buy Qty</label>
-                    <input class="form-control" id="txtPlaceOrderBuyQty" type="number">
+                    <input class="form-control" id="txtPlaceOrderBuyQty" type="number" min="1" required>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     <button class="btn btn-outline-primary mx-2" id="btnAddToCart" type="button">Add to Cart
@@ -71,7 +71,7 @@
                 </div>
                 <div class="mb-2">
                     <label for="txtPlaceOrderTotal" class="form-label fw-bold">Total</label>
-                    <input class="form-control" id="txtPlaceOrderTotal" type="number" disabled>
+                    <input class="form-control" id="txtPlaceOrderTotal" type="number" readonly>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     <button class="btn btn-outline-success mx-2" id="btnPlaceOrder" type="button">Place Order
