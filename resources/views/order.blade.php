@@ -103,7 +103,7 @@
 
 </main>
 <script>
-    let cart = [];
+    var cart = [];
     generateOrderId();
     getAllCustomersToCombo();
     getAllItemsToCombo();
@@ -252,6 +252,13 @@
                 total: total
             });
         }
+
+        // Clear inputs
+        $("#txtPlaceOrderItemCode").val('');
+        $("#txtPlaceOrderItemDescription").val('');
+        $("#txtPlaceOrderItemUnitPrice").val('');
+        $("#txtPlaceOrderItemQtyOnHand").val('');
+        $("#txtPlaceOrderBuyQty").val('');
 
         updateCartTable();
     });
