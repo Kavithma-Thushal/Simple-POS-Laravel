@@ -114,7 +114,9 @@
                 </tr>`;
 
                     $("#customerTable").append(row);
+                    generateCustomerId();
                     customerTableListener();
+                    clearCustomerInputs();
                 },
                 error: function (error) {
                     $("#customerTable").empty();
