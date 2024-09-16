@@ -35,7 +35,7 @@
 </nav>
 
 <!-- Dashboard -->
-<section id="dashboardSection" class="container-fluid my-5">
+<section id="dashboardSection" class="container-fluid">
 
     <div class="d-flex justify-content-center">
 

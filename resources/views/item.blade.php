@@ -1,5 +1,5 @@
 <main>
-    <h1 class="text-center fw-bold m-4">Item Management</h1>
+    <h2 class="text-center fw-bold mt-3">Item Management</h2>
 
     <div class="row">
 
@@ -243,7 +243,7 @@
             $("#txtItemUnitPrice").val("");
             $("#txtItemQtyOnHand").val("");
 
-            $("#btnSaveItem").prop("disabled", false);
+            $("#btnSaveItem").prop("disabled", true);
             $("#btnUpdateItem").prop("disabled", true);
             $("#btnDeleteItem").prop("disabled", true);
         }

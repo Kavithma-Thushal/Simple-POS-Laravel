@@ -1,10 +1,10 @@
 <main>
-    <h1 class="text-center fw-bold mt-4">Order Management</h1>
+    <h2 class="text-center fw-bold mt-3">Order Management</h2>
 
     <div class="row justify-content-center">
 
         <!-- Customer Details -->
-        <div class="col-3 p-5 m-5 shadow-lg border-light rounded">
+        <div class="col-3 p-5 m-5 mt-3 shadow-lg border-light rounded">
             <form>
                 <h3 class="text-center mb-4">Customer Details</h3>
                 <div class="mb-2">
@@ -33,7 +33,7 @@
         </div>
 
         <!-- Item Details -->
-        <div class="col-3 p-5 m-5 shadow-lg border-light rounded">
+        <div class="col-3 p-5 m-5 mt-3 shadow-lg border-light rounded">
             <form>
                 <h3 class="text-center mb-4">Item Details</h3>
                 <div class="mb-2">
@@ -58,7 +58,7 @@
         </div>
 
         <!-- Payment Details -->
-        <div class="col-3 p-5 m-5 shadow-lg border-light rounded">
+        <div class="col-3 p-5 m-5 mt-3 shadow-lg border-light rounded">
             <form>
                 <h3 class="text-center mb-4">Payment Details</h3>
                 <div class="mb-2">

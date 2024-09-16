@@ -1,8 +1,8 @@
 <main>
-    <h1 class="text-center fw-bold mt-4">Order Details</h1>
+    <h2 class="text-center fw-bold mt-3">Order Details</h2>
 
     <div class="row justify-content-center">
-        <div class="col-10 mt-5">
+        <div class="col-10 mt-3">
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                 <tr>

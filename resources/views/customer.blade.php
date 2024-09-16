@@ -1,5 +1,5 @@
 <main>
-    <h1 class="text-center fw-bold m-4">Customer Management</h1>
+    <h2 class="text-center fw-bold mt-3">Customer Management</h2>
 
     <div class="row">
 
@@ -248,7 +248,7 @@
             $("#txtCustomerAddress").val("");
             $("#txtCustomerSalary").val("");
 
-            $("#btnSaveCustomer").prop("disabled", false);
+            $("#btnSaveCustomer").prop("disabled", true);
             $("#btnUpdateCustomer").prop("disabled", true);
             $("#btnDeleteCustomer").prop("disabled", true);
         }
