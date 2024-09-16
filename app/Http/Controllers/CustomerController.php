@@ -22,7 +22,8 @@ class CustomerController extends Controller
             'salary' => 'required|numeric',
         ]);
 
-        if (!Customer::where('id', $validatedData['id'])->exists()) {
+        $customer = Customer::where('id', $validatedData['id'])->exists();
+        if (!$customer) {
             Customer::create($validatedData);
             return response()->json(
                 ['message' => 'Customer Saved Successfully...!'],
