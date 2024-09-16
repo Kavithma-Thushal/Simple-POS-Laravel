@@ -111,9 +111,12 @@
                 </tr>`;
 
                     $("#itemTable").append(row);
+                    itemTableListener();
                 },
                 error: function (error) {
-                    getAllItems();
+                    $("#itemTable").empty();
+                    let errorRow = `<tr><td colspan="4" class="text-center text-danger">${error.responseJSON.message}</td></tr>`;
+                    $("#itemTable").append(errorRow);
                     errorNotification(error.responseJSON.message);
                 }
             });

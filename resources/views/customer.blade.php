@@ -114,9 +114,12 @@
                 </tr>`;
 
                     $("#customerTable").append(row);
+                    customerTableListener();
                 },
                 error: function (error) {
-                    getAllCustomers();
+                    $("#customerTable").empty();
+                    let errorRow = `<tr><td colspan="4" class="text-center text-danger">${error.responseJSON.message}</td></tr>`;
+                    $("#customerTable").append(errorRow);
                     errorNotification(error.responseJSON.message);
                 }
             });
