@@ -108,23 +108,35 @@ class CustomerController extends Controller
     public function getAllCustomers()
     {
         $customers = Customer::all();
-        return response()->json($customers);
+        if ($customers->isNotEmpty()) {
+            return response()->json(
+                ['data' => $customers],
+                200
+            );
+        } else {
+            return response()->json(
+                ['message' => 'No Customers Found'],
+                404
+            );
+        }
     }
 
     public function generateCustomerId()
     {
         $lastCustomerId = Customer::orderBy('id', 'desc')->value('id');
-
         if (!$lastCustomerId) {
             $lastCustomerId = "C00-000";
         }
-
-        return response()->json(['data' => $lastCustomerId]);
+        return response()->json(
+            ['data' => $lastCustomerId],
+            200
+        );
     }
 
-    public function getCustomerCount()
+    public function getCustomerCount(Request $request)
     {
-        $totalCustomers = Customer::count();
-        return response()->json(['data' => $totalCustomers]);
+        return response()->json(
+            ['data' => Customer::count()]
+        );
     }
 }
