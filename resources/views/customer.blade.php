@@ -225,9 +225,6 @@
                     let number = parseInt(parts[1]) + 1;
                     let newCustomerId = prefix + '-' + number.toString().padStart(3, '0');
                     $("#txtCustomerId").val(newCustomerId);
-                },
-                error: function (error) {
-                    console.log(error.responseJSON.message);
                 }
             });
         }

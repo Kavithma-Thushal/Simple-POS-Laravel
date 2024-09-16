@@ -126,9 +126,6 @@
             method: "GET",
             success: function (response) {
                 $("#customerCount").text(response.data);
-            },
-            error: function (error) {
-                console.log(error.responseJSON.message);
             }
         });
     }
@@ -139,9 +136,6 @@
             method: "GET",
             success: function (response) {
                 $("#itemCount").text(response.data);
-            },
-            error: function (error) {
-                console.log(error.responseJSON.message);
             }
         });
     }
@@ -152,9 +146,6 @@
             method: "GET",
             success: function (response) {
                 $("#orderCount").text(response.data);
-            },
-            error: function (error) {
-                console.log(error.responseJSON.message);
             }
         });
     }
