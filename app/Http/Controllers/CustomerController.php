@@ -14,17 +14,26 @@ class CustomerController extends Controller
 
     public function saveCustomer(Request $request)
     {
+        // Validate the request
         $validatedData = $request->validate([
-            'id' => 'required|string|unique:customers,id',
+            'id' => 'required|string',
             'name' => 'required|string',
             'address' => 'required|string',
             'salary' => 'required|numeric',
         ]);
 
-        Customer::create($validatedData);
-        return response()->json(
-            ['message' => 'Customer Saved Successfully...!'],
-            201);
+        if (!Customer::where('id', $validatedData['id'])->exists()) {
+            Customer::create($validatedData);
+            return response()->json(
+                ['message' => 'Customer Saved Successfully...!'],
+                200
+            );
+        } else {
+            return response()->json(
+                ['message' => 'Duplicate Customer Id: ' . $validatedData['id']],
+                400
+            );
+        }
     }
 
     public function searchCustomer(Request $request)
