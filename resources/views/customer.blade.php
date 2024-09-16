@@ -70,6 +70,7 @@
 <script src="{{ asset('assets/js/validation/CustomerValidation.js') }}"></script>
 <script>
     $(document).ready(function () {
+        generateCustomerId();
         getAllCustomers();
 
         // Save Customer
