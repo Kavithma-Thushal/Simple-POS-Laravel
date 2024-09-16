@@ -39,14 +39,22 @@ class CustomerController extends Controller
 
     public function searchCustomer(Request $request)
     {
-        $query = $request->input('id');
-        $customer = Customer::where('id', $query)->first();
+        // Validate the request
+        $validatedData = $request->validate([
+            'id' => 'required|string',
+        ]);
+
+        $customer = Customer::where('id', $validatedData['id'])->first();
         if ($customer) {
-            return response()->json(['data' => $customer]);
+            return response()->json(
+                ['data' => $customer],
+                200
+            );
         } else {
             return response()->json(
-                ['message' => 'Customer Not Found...!'],
-                404);
+                ['message' => 'Customer Not Found: ' . $validatedData['id']],
+                404
+            );
         }
     }
 
