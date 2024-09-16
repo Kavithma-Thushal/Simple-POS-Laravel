@@ -68,6 +68,7 @@
     </div>
 </main>
 <script src="{{ asset('assets/js/Notification.js') }}"></script>
+<script src="{{ asset('assets/js/validation/ItemValidation.js') }}"></script>
 <script>
     $(document).ready(function () {
         getAllItems();
@@ -189,6 +190,8 @@
                         $("#itemTable").append(row);
                     });
                     generateItemCode();
+                    itemValidation();
+                    resetItemBorders();
                     itemTableListener();
                     clearItemInputs();
                 },
