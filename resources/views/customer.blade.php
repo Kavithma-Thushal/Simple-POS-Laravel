@@ -122,7 +122,6 @@
                     $("#customerTable").empty();
                     let errorRow = `<tr><td colspan="4" class="text-center text-danger">${error.responseJSON.message}</td></tr>`;
                     $("#customerTable").append(errorRow);
-                    errorNotification(error.responseJSON.message);
                 }
             });
         });
@@ -156,6 +155,8 @@
                 data: {id: $("#txtCustomerId").val()},
                 success: function (response) {
                     getAllCustomers();
+                    generateCustomerId();
+                    clearCustomerInputs();
                     successNotification(response.message);
                 },
                 error: function (error) {
