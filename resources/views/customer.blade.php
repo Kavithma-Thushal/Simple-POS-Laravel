@@ -70,6 +70,7 @@
 <script src="{{ asset('assets/js/validation/CustomerValidation.js') }}"></script>
 <script>
     $(document).ready(function () {
+        generateCustomerId();
         getAllCustomers();
 
         // Save Customer
@@ -201,7 +202,9 @@
                     clearCustomerInputs();
                 },
                 error: function (error) {
-                    console.log(error.responseJSON.message);
+                    $("#customerTable").empty();
+                    let errorRow = `<tr><td colspan="4" class="text-center text-danger">${error.responseJSON.message}</td></tr>`;
+                    $("#customerTable").append(errorRow);
                 }
             });
         }
