@@ -67,7 +67,6 @@
 
     </div>
 </main>
-<script src="{{ asset('assets/js/Notification.js') }}"></script>
 <script src="{{ asset('assets/js/validation/ItemValidation.js') }}"></script>
 <script>
     $(document).ready(function () {
