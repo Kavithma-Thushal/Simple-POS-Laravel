@@ -52,6 +52,7 @@ class CustomerController extends Controller
 
     public function updateCustomer(Request $request)
     {
+        // Validate the request
         $validatedData = $request->validate([
             'id' => 'required|string',
             'name' => 'required|string',
@@ -59,11 +60,19 @@ class CustomerController extends Controller
             'salary' => 'required|numeric',
         ]);
 
-        $customer = Customer::findOrFail($validatedData['id']);
-        $customer->update($validatedData);
-        return response()->json(
-            ['message' => 'Customer Updated Successfully...!'],
-            201);
+        $customer = Customer::find($validatedData['id']);
+        if ($customer) {
+            $customer->update($validatedData);
+            return response()->json(
+                ['message' => 'Customer Updated Successfully...!'],
+                200
+            );
+        } else {
+            return response()->json(
+                ['message' => 'Customer Not Found: ' . $validatedData['id']],
+                400
+            );
+        }
     }
 
     public function deleteCustomer(Request $request)
