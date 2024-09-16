@@ -313,15 +313,15 @@
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(orderObj),
-            success: function (res) {
+            success: function (response) {
                 cart = [];  // Clear cart after successful order
                 updateCartTable();
                 getOrderCount();
                 generateOrderId();
-                alert(res.message);
+                successNotification(response.message);
             },
             error: function (error) {
-                alert(error.responseJSON.message);
+                errorNotification(error.responseJSON.message);
             }
         });
     });

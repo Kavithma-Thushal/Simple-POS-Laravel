@@ -67,6 +67,7 @@
 
     </div>
 </main>
+<script src="{{ asset('assets/js/Notification.js') }}"></script>
 <script>
     $(document).ready(function () {
         getAllCustomers();
@@ -84,11 +85,11 @@
                 // },
                 success: function (response) {
                     getAllCustomers();
-                    alert(response.message);
+                    successNotification(response.message);
                 },
                 error: function (error) {
                     getAllCustomers();
-                    alert(error.responseJSON.message);
+                    errorNotification(error.responseJSON.message);
                 }
             });
         });
@@ -115,7 +116,7 @@
                 },
                 error: function (error) {
                     getAllCustomers();
-                    alert(error.responseJSON.message);
+                    errorNotification(error.responseJSON.message);
                 }
             });
         });
@@ -130,11 +131,11 @@
                 data: $('#customerForm').serialize(),
                 success: function (response) {
                     getAllCustomers();
-                    alert(response.message);
+                    successNotification(response.message);
                 },
                 error: function (error) {
                     getAllCustomers();
-                    alert(error.responseJSON.message);
+                    errorNotification(error.responseJSON.message);
                 }
             });
         });
@@ -149,11 +150,11 @@
                 data: {id: $("#txtCustomerId").val()},
                 success: function (response) {
                     getAllCustomers();
-                    alert(response.message);
+                    successNotification(response.message);
                 },
                 error: function (error) {
                     getAllCustomers();
-                    alert(error.responseJSON.message);
+                    errorNotification(error.responseJSON.message);
                 }
             });
         });
