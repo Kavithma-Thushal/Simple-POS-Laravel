@@ -119,6 +119,9 @@
                     clearCustomerInputs();
                 },
                 error: function (error) {
+                    generateCustomerId();
+                    clearCustomerInputs();
+
                     $("#customerTable").empty();
                     let errorRow = `<tr><td colspan="4" class="text-center text-danger">${error.responseJSON.message}</td></tr>`;
                     $("#customerTable").append(errorRow);
@@ -155,7 +158,6 @@
                 data: {id: $("#txtCustomerId").val()},
                 success: function (response) {
                     getAllCustomers();
-                    generateCustomerId();
                     clearCustomerInputs();
                     successNotification(response.message);
                 },
@@ -248,7 +250,6 @@
 
         function clearCustomerInputs() {
             $("#txtSearchCustomer").val("");
-            $("#txtCustomerId").val("");
             $("#txtCustomerName").val("");
             $("#txtCustomerAddress").val("");
             $("#txtCustomerSalary").val("");
