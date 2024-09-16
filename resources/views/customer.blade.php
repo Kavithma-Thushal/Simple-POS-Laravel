@@ -70,7 +70,6 @@
 <script src="{{ asset('assets/js/validation/CustomerValidation.js') }}"></script>
 <script>
     $(document).ready(function () {
-        generateCustomerId();
         getAllCustomers();
 
         // Save Customer
@@ -180,7 +179,7 @@
                 success: function (response) {
                     $('#customerTable').empty();
 
-                    response.forEach(customer => {
+                    response.data.forEach(customer => {
                         let id = customer.id;
                         let name = customer.name;
                         let address = customer.address;
