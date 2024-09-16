@@ -26,8 +26,7 @@ class CustomerController extends Controller
         if (!$customer) {
             Customer::create($validatedData);
             return response()->json(
-                ['message' => 'Customer Saved Successfully...!'],
-                200
+                ['message' => 'Customer Saved Successfully...!']
             );
         } else {
             return response()->json(
@@ -47,8 +46,7 @@ class CustomerController extends Controller
         $customer = Customer::where('id', $validatedData['id'])->first();
         if ($customer) {
             return response()->json(
-                ['data' => $customer],
-                200
+                ['data' => $customer]
             );
         } else {
             return response()->json(
@@ -72,13 +70,12 @@ class CustomerController extends Controller
         if ($customer) {
             $customer->update($validatedData);
             return response()->json(
-                ['message' => 'Customer Updated Successfully...!'],
-                200
+                ['message' => 'Customer Updated Successfully...!']
             );
         } else {
             return response()->json(
                 ['message' => 'Customer Not Found: ' . $validatedData['id']],
-                400
+                404
             );
         }
     }
@@ -94,8 +91,7 @@ class CustomerController extends Controller
         if ($customer) {
             $customer->delete();
             return response()->json(
-                ['message' => 'Customer Deleted Successfully...!'],
-                200
+                ['message' => 'Customer Deleted Successfully...!']
             );
         } else {
             return response()->json(
@@ -110,8 +106,7 @@ class CustomerController extends Controller
         $customers = Customer::all();
         if ($customers->isNotEmpty()) {
             return response()->json(
-                ['data' => $customers],
-                200
+                ['data' => $customers]
             );
         } else {
             return response()->json(
@@ -128,8 +123,7 @@ class CustomerController extends Controller
             $lastCustomerId = "C00-000";
         }
         return response()->json(
-            ['data' => $lastCustomerId],
-            200
+            ['data' => $lastCustomerId]
         );
     }
 
