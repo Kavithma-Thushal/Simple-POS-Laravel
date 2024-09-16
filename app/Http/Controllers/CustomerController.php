@@ -50,7 +50,7 @@ class CustomerController extends Controller
             );
         } else {
             return response()->json(
-                ['message' => 'Customer Not Found: ' . $validatedData['id']],
+                ['message' => 'Customer Not Found...!'],
                 404
             );
         }
@@ -110,7 +110,7 @@ class CustomerController extends Controller
             );
         } else {
             return response()->json(
-                ['message' => 'No Customers Found'],
+                ['message' => 'No Customers Found...!'],
                 404
             );
         }
