@@ -85,14 +85,23 @@ class CustomerController extends Controller
 
     public function deleteCustomer(Request $request)
     {
-        $customer = Customer::find($request->input('id'));
+        // Validate the request
+        $validatedData = $request->validate([
+            'id' => 'required|string',
+        ]);
+
+        $customer = Customer::find($validatedData['id']);
         if ($customer) {
             $customer->delete();
-            return response()->json(['message' => 'Customer Deleted Successfully...!']);
+            return response()->json(
+                ['message' => 'Customer Deleted Successfully...!'],
+                200
+            );
         } else {
             return response()->json(
-                ['message' => 'Customer Not Found...!'],
-                404);
+                ['message' => 'Customer Not Found: ' . $validatedData['id']],
+                404
+            );
         }
     }
 
