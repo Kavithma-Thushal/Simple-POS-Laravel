@@ -70,8 +70,10 @@
 <script src="{{ asset('assets/js/validation/ItemValidation.js') }}"></script>
 <script>
     $(document).ready(function () {
-        generateItemCode();
         getAllItemsToTable();
+        generateItemCode();
+        itemValidation();
+        resetItemBorders();
 
         // Save Item
         $('#btnSaveItem').click(function (e) {
@@ -82,12 +84,12 @@
                 type: 'POST',
                 data: $('#itemForm').serialize(),
                 success: function (response) {
-                    getAllItemsToTable();
                     successNotification(response.message);
+                    getAllItemsToTable();
                 },
                 error: function (error) {
-                    getAllItemsToTable();
                     errorNotification(error.responseJSON.message);
+                    getAllItemsToTable();
                 }
             });
         });
@@ -135,12 +137,12 @@
                 type: 'PUT',
                 data: $('#itemForm').serialize(),
                 success: function (response) {
-                    getAllItemsToTable();
                     successNotification(response.message);
+                    getAllItemsToTable();
                 },
                 error: function (error) {
-                    getAllItemsToTable();
                     errorNotification(error.responseJSON.message);
+                    getAllItemsToTable();
                 }
             });
         });
@@ -154,13 +156,13 @@
                 type: 'DELETE',
                 data: {id: $("#txtItemCode").val()},
                 success: function (response) {
+                    successNotification(response.message);
                     getAllItemsToTable();
                     clearItemInputs();
-                    successNotification(response.message);
                 },
                 error: function (error) {
-                    getAllItemsToTable();
                     errorNotification(error.responseJSON.message);
+                    getAllItemsToTable();
                 }
             });
         });
@@ -173,6 +175,7 @@
         // Reset Items
         $('#btnResetItem').click(function () {
             getAllItemsToTable();
+            generateItemCode();
         });
 
         function getAllItemsToTable() {
@@ -198,10 +201,10 @@
                         $("#itemTable").append(row);
                     });
                     generateItemCode();
-                    itemValidation();
-                    resetItemBorders();
                     itemTableListener();
                     clearItemInputs();
+                    itemValidation();
+                    resetItemBorders();
                 },
                 error: function (error) {
                     $("#itemTable").empty();
