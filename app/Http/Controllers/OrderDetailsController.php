@@ -13,37 +13,39 @@ class OrderDetailsController extends Controller
 
     public function getOrderDetails()
     {
-        // Retrieve all orders with their customer and order details, along with the related items
         $ordersList = Order::with(['customer', 'orderDetails.item'])->get();
 
-        // Initialize an array to store the order DTOs
-        $orderDTOList = [];
+        if ($ordersList->isNotEmpty()) {
+            // Initialize an array to store the order DTOs
+            $orderDTOList = [];
 
-        // Loop through each order
-        foreach ($ordersList as $order) {
-            $orderDTO = [
-                'orderId' => $order->orderId,
-                'customerId' => $order->customer->id,
-                'orderDetailsList' => []
-            ];
-
-            // Loop through the order details
-            foreach ($order->orderDetails as $orderDetails) {
-                $orderDetailsDTO = [
-                    'itemCode' => $orderDetails->item->code,
-                    'buyQty' => $orderDetails->buyQty,
-                    'total' => $orderDetails->total
+            // Loop through each order
+            foreach ($ordersList as $order) {
+                $orderDTO = [
+                    'orderId' => $order->orderId,
+                    'customerId' => $order->customer->id,
+                    'orderDetailsList' => []
                 ];
 
-                // Add order details DTO to the list
-                $orderDTO['orderDetailsList'][] = $orderDetailsDTO;
+                // Loop through the order details
+                foreach ($order->orderDetails as $orderDetails) {
+                    $orderDetailsDTO = [
+                        'itemCode' => $orderDetails->item->code,
+                        'buyQty' => $orderDetails->buyQty,
+                        'total' => $orderDetails->total
+                    ];
+
+                    // Add order details DTO to the list
+                    $orderDTO['orderDetailsList'][] = $orderDetailsDTO;
+                }
+
+                // Add order DTO to the list
+                $orderDTOList[] = $orderDTO;
             }
 
-            // Add order DTO to the list
-            $orderDTOList[] = $orderDTO;
+            return response()->json(['data' => $orderDTOList]);
+        } else {
+            return response()->json(['message' => 'No Orders Yet...!'], 404);
         }
-
-        // Return a JSON response
-        return response()->json(['data' => $orderDTOList]);
     }
 }
