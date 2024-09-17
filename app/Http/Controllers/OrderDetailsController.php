@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controller;
+
 use App\Models\Order;
 
 class OrderDetailsController extends Controller
