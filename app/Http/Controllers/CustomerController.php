@@ -14,7 +14,6 @@ class CustomerController extends Controller
 
     public function saveCustomer(Request $request)
     {
-        // Validate the request
         $validatedData = $request->validate([
             'id' => 'required|string',
             'name' => 'required|string',
@@ -43,7 +42,6 @@ class CustomerController extends Controller
 
     public function updateCustomer(Request $request)
     {
-        // Validate the request
         $validatedData = $request->validate([
             'id' => 'required|string',
             'name' => 'required|string',

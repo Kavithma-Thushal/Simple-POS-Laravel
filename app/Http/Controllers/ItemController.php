@@ -14,7 +14,6 @@ class ItemController extends Controller
 
     public function saveItem(Request $request)
     {
-        // Validate the request
         $validatedData = $request->validate([
             'code' => 'required|string',
             'description' => 'required|string',
@@ -43,7 +42,6 @@ class ItemController extends Controller
 
     public function updateItem(Request $request)
     {
-        // Validate the request
         $validatedData = $request->validate([
             'code' => 'required|string',
             'description' => 'required|string',
