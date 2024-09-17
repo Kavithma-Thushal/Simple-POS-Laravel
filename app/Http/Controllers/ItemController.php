@@ -14,34 +14,7 @@ class ItemController extends Controller
 
     public function saveItem(Request $request)
     {
-        $validatedData = $request->validate([
-            'code' => 'required|string|unique:items,code',
-            'description' => 'required|string',
-            'unitPrice' => 'required|numeric',
-            'qtyOnHand' => 'required|integer',
-        ]);
-
-        Item::create($validatedData);
-        return response()->json(
-            ['message' => 'Item Saved Successfully...!'],
-            201);
-    }
-
-    public function searchItem(Request $request)
-    {
-        $query = $request->input('id');
-        $item = Item::where('code', $query)->first();
-        if ($item) {
-            return response()->json(['data' => $item]);
-        } else {
-            return response()->json(
-                ['message' => 'Item Not Found...!'],
-                404);
-        }
-    }
-
-    public function updateItem(Request $request)
-    {
+        // Validate the request
         $validatedData = $request->validate([
             'code' => 'required|string',
             'description' => 'required|string',
@@ -49,46 +22,115 @@ class ItemController extends Controller
             'qtyOnHand' => 'required|integer',
         ]);
 
-        $item = Item::findOrFail($validatedData['code']);
-        $item->update($validatedData);
-        return response()->json(
-            ['message' => 'Item Updated Successfully...!'],
-            201);
+        $item = Item::where('code', $validatedData['code'])->exists();
+        if (!$item) {
+            Item::create($validatedData);
+            return response()->json(
+                ['message' => 'Item Saved Successfully...!']
+            );
+        } else {
+            return response()->json(
+                ['message' => 'Duplicate Item Code: ' . $validatedData['code']],
+                400
+            );
+        }
+    }
+
+    public function searchItem(Request $request)
+    {
+        // Validate the request
+        $validatedData = $request->validate([
+            'code' => 'required|string',
+        ]);
+
+        $item = Item::where('code', $validatedData['code'])->first();
+        if ($item) {
+            return response()->json(
+                ['data' => $item]
+            );
+        } else {
+            return response()->json(
+                ['message' => 'Item Not Found...!'],
+                404
+            );
+        }
+    }
+
+    public function updateItem(Request $request)
+    {
+        // Validate the request
+        $validatedData = $request->validate([
+            'code' => 'required|string',
+            'description' => 'required|string',
+            'unitPrice' => 'required|numeric',
+            'qtyOnHand' => 'required|integer',
+        ]);
+
+        $item = Item::find($validatedData['code']);
+        if ($item) {
+            $item->update($validatedData);
+            return response()->json(
+                ['message' => 'Item Updated Successfully...!']
+            );
+        } else {
+            return response()->json(
+                ['message' => 'Item Not Found: ' . $validatedData['code']],
+                404
+            );
+        }
     }
 
     public function deleteItem(Request $request)
     {
-        $item = Item::find($request->input('id'));
+        // Validate the request
+        $validatedData = $request->validate([
+            'code' => 'required|string',
+        ]);
+
+        $item = Item::find($validatedData['code']);
         if ($item) {
             $item->delete();
-            return response()->json(['message' => 'Item Deleted Successfully...!']);
+            return response()->json(
+                ['message' => 'Item Deleted Successfully...!']
+            );
         } else {
             return response()->json(
-                ['message' => 'Item Not Found...!'],
-                404);
+                ['message' => 'Item Not Found: ' . $validatedData['code']],
+                404
+            );
         }
     }
 
     public function getAllItems()
     {
-        $item = Item::all();
-        return response()->json($item);
+        $items = Item::all();
+        if ($items->isNotEmpty()) {
+            return response()->json(
+                ['data' => $items]
+            );
+        } else {
+            return response()->json(
+                ['message' => 'No Items Found...!'],
+                404
+            );
+        }
     }
 
     public function generateItemCode()
     {
         $lastItemCode = Item::orderBy('code', 'desc')->value('code');
-
         if (!$lastItemCode) {
             $lastItemCode = "I00-000";
         }
-
-        return response()->json(['data' => $lastItemCode]);
+        return response()->json(
+            ['data' => $lastItemCode]
+        );
     }
 
     public function getItemCount()
     {
-        $totalItems = Item::count();
-        return response()->json(['data' => $totalItems]);
+        return response()->json(
+            ['data' => Item::count()]
+        );
     }
 }

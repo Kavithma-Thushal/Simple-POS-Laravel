@@ -127,7 +127,7 @@ class CustomerController extends Controller
         );
     }
 
-    public function getCustomerCount(Request $request)
+    public function getCustomerCount()
     {
         return response()->json(
             ['data' => Customer::count()]
