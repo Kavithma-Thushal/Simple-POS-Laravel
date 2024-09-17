@@ -8,7 +8,7 @@
         "pos"
     ],
     "author": "Kavithma Thushal",
-    "license": "MIT",
+    "license": "GNU",
     "private": true,
     "require": {
         "php": "^8.2",

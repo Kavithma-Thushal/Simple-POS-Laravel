@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Simple POS Implemented Using Laravel",
     "author": "Kavithma Thushal",
-    "license": "MIT",
+    "license": "GNU",
     "private": true,
     "scripts": {
         "dev": "vite",
