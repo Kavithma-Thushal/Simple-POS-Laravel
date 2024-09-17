@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 
@@ -15,26 +14,13 @@ class CustomerController extends Controller
 
     public function saveCustomer(Request $request)
     {
-        $rules = [
-            'id' => ['required', 'regex:/^C\d{2}-\d{3}$/'],
-            'name' => ['required', 'regex:/^[A-Za-z\s\'-]{4,}$/'],
-            'address' => ['required', 'regex:/^[A-Za-z\s\'-]{4,}$/'],
-            'salary' => ['required', 'numeric', 'min:0'],
-        ];
+        $validatedData = $request->validate([
+            'id' => 'required|string',
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'salary' => 'required|numeric',
+        ]);
 
-        $messages = [
-            'id.regex' => 'Customer ID format must be like "C00-001" or "C12-345"',
-            'name.regex' => 'Name must contain at least 4 letters',
-            'address.regex' => 'Address must contain at least 4 letters',
-            'salary.min' => 'Salary must be a positive value or zero',
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $validatedData = $validator->validated();
         $customer = Customer::where('id', $validatedData['id'])->exists();
         if (!$customer) {
             Customer::create($validatedData);
@@ -56,26 +42,13 @@ class CustomerController extends Controller
 
     public function updateCustomer(Request $request)
     {
-        $rules = [
-            'id' => ['required', 'regex:/^C\d{2}-\d{3}$/'],
-            'name' => ['required', 'regex:/^[A-Za-z\s\'-]{4,}$/'],
-            'address' => ['required', 'regex:/^[A-Za-z\s\'-]{4,}$/'],
-            'salary' => ['required', 'numeric', 'min:0'],
-        ];
+        $validatedData = $request->validate([
+            'id' => 'required|string',
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'salary' => 'required|numeric',
+        ]);
 
-        $messages = [
-            'id.regex' => 'Customer ID format must be like "C00-001" or "C12-345"',
-            'name.regex' => 'Name must contain at least 4 letters',
-            'address.regex' => 'Address must contain at least 4 letters',
-            'salary.min' => 'Salary must be a positive value or zero',
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $validatedData = $validator->validated();
         $customer = Customer::find($validatedData['id']);
         if ($customer) {
             $customer->update($validatedData);
