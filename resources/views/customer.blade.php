@@ -70,8 +70,10 @@
 <script src="{{ asset('assets/js/validation/CustomerValidation.js') }}"></script>
 <script>
     $(document).ready(function () {
-        generateCustomerId();
         getAllCustomersToTable();
+        generateCustomerId();
+        customerValidation();
+        resetCustomerBorders();
 
         // Save Customer
         $('#btnSaveCustomer').click(function (e) {
@@ -85,12 +87,12 @@
                 //     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 // },
                 success: function (response) {
-                    getAllCustomersToTable();
                     successNotification(response.message);
+                    getAllCustomersToTable();
                 },
                 error: function (error) {
-                    getAllCustomersToTable();
                     errorNotification(error.responseJSON.message);
+                    getAllCustomersToTable();
                 }
             });
         });
@@ -138,12 +140,12 @@
                 type: 'PUT',
                 data: $('#customerForm').serialize(),
                 success: function (response) {
-                    getAllCustomersToTable();
                     successNotification(response.message);
+                    getAllCustomersToTable();
                 },
                 error: function (error) {
-                    getAllCustomersToTable();
                     errorNotification(error.responseJSON.message);
+                    getAllCustomersToTable();
                 }
             });
         });
@@ -157,13 +159,13 @@
                 type: 'DELETE',
                 data: {id: $("#txtCustomerId").val()},
                 success: function (response) {
+                    successNotification(response.message);
                     getAllCustomersToTable();
                     clearCustomerInputs();
-                    successNotification(response.message);
                 },
                 error: function (error) {
-                    getAllCustomersToTable();
                     errorNotification(error.responseJSON.message);
+                    getAllCustomersToTable();
                 }
             });
         });
@@ -176,6 +178,7 @@
         // Reset Customers
         $('#btnResetCustomer').click(function () {
             getAllCustomersToTable();
+            generateCustomerId();
         });
 
         function getAllCustomersToTable() {
@@ -201,10 +204,10 @@
                         $("#customerTable").append(row);
                     });
                     generateCustomerId();
-                    customerValidation();
-                    resetCustomerBorders();
                     customerTableListener();
                     clearCustomerInputs();
+                    customerValidation();
+                    resetCustomerBorders();
                 },
                 error: function (error) {
                     $("#customerTable").empty();
