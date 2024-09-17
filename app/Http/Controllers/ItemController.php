@@ -40,10 +40,10 @@ class ItemController extends Controller
     {
         // Validate the request
         $validatedData = $request->validate([
-            'code' => 'required|string',
+            'id' => 'required|string',
         ]);
 
-        $item = Item::where('code', $validatedData['code'])->first();
+        $item = Item::where('code', $validatedData['id'])->first();
         if ($item) {
             return response()->json(
                 ['data' => $item]
@@ -84,10 +84,10 @@ class ItemController extends Controller
     {
         // Validate the request
         $validatedData = $request->validate([
-            'code' => 'required|string',
+            'id' => 'required|string',
         ]);
 
-        $item = Item::find($validatedData['code']);
+        $item = Item::find($validatedData['id']);
         if ($item) {
             $item->delete();
             return response()->json(
@@ -95,7 +95,7 @@ class ItemController extends Controller
             );
         } else {
             return response()->json(
-                ['message' => 'Item Not Found: ' . $validatedData['code']],
+                ['message' => 'Item Not Found: ' . $validatedData['id']],
                 404
             );
         }
