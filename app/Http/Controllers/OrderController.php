@@ -26,15 +26,23 @@ class OrderController extends Controller
             'orderDetailsList.*.total' => 'required|numeric',
         ]);
 
-        // Check Order Id
-        if (Order::where('orderId', $request->orderId)->exists()) {
-            return response()->json(['message' => 'Duplicate Order Id: ' . $request->orderId], 400);
-        }
-
-        // Check Customer Id
+        // Check if Customer exists
         $customer = Customer::find($request->customerId);
         if (!$customer) {
             return response()->json(['message' => 'Customer Not Found: ' . $request->customerId], 404);
+        }
+
+        // Check if all Items exist
+        foreach ($request->orderDetailsList as $orderDetail) {
+            $item = Item::find($orderDetail['itemCode']);
+            if (!$item) {
+                return response()->json(['message' => 'Item Not Found: ' . $orderDetail['itemCode']], 404);
+            }
+        }
+
+        // Check Order Id
+        if (Order::where('orderId', $request->orderId)->exists()) {
+            return response()->json(['message' => 'Duplicate Order Id: ' . $request->orderId], 400);
         }
 
         // Create the Order
@@ -46,9 +54,6 @@ class OrderController extends Controller
         // Prepare OrderDetails and Update Item Qty
         foreach ($request->orderDetailsList as $orderDetail) {
             $item = Item::find($orderDetail['itemCode']);
-            if (!$item) {
-                return response()->json(['message' => 'Item Not Found: ' . $orderDetail['itemCode']], 404);
-            }
 
             // Convert buyQty to integer
             $buyQty = intval($orderDetail['buyQty']);
