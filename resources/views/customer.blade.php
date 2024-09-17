@@ -71,7 +71,7 @@
 <script>
     $(document).ready(function () {
         generateCustomerId();
-        getAllCustomers();
+        getAllCustomersToTable();
 
         // Save Customer
         $('#btnSaveCustomer').click(function (e) {
@@ -85,11 +85,11 @@
                 //     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 // },
                 success: function (response) {
-                    getAllCustomers();
+                    getAllCustomersToTable();
                     successNotification(response.message);
                 },
                 error: function (error) {
-                    getAllCustomers();
+                    getAllCustomersToTable();
                     errorNotification(error.responseJSON.message);
                 }
             });
@@ -138,11 +138,11 @@
                 type: 'PUT',
                 data: $('#customerForm').serialize(),
                 success: function (response) {
-                    getAllCustomers();
+                    getAllCustomersToTable();
                     successNotification(response.message);
                 },
                 error: function (error) {
-                    getAllCustomers();
+                    getAllCustomersToTable();
                     errorNotification(error.responseJSON.message);
                 }
             });
@@ -157,12 +157,12 @@
                 type: 'DELETE',
                 data: {id: $("#txtCustomerId").val()},
                 success: function (response) {
-                    getAllCustomers();
+                    getAllCustomersToTable();
                     clearCustomerInputs();
                     successNotification(response.message);
                 },
                 error: function (error) {
-                    getAllCustomers();
+                    getAllCustomersToTable();
                     errorNotification(error.responseJSON.message);
                 }
             });
@@ -170,15 +170,15 @@
 
         // Get All Customers
         $('#btnGetAllCustomers').click(function () {
-            getAllCustomers();
+            getAllCustomersToTable();
         });
 
         // Reset Customers
         $('#btnResetCustomer').click(function () {
-            getAllCustomers();
+            getAllCustomersToTable();
         });
 
-        function getAllCustomers() {
+        function getAllCustomersToTable() {
             $.ajax({
                 url: '{{ route('get-all-customers') }}',
                 type: 'GET',

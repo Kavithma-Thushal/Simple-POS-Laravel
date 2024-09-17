@@ -71,7 +71,7 @@
 <script>
     $(document).ready(function () {
         generateItemCode();
-        getAllItems();
+        getAllItemsToTable();
 
         // Save Item
         $('#btnSaveItem').click(function (e) {
@@ -82,11 +82,11 @@
                 type: 'POST',
                 data: $('#itemForm').serialize(),
                 success: function (response) {
-                    getAllItems();
+                    getAllItemsToTable();
                     successNotification(response.message);
                 },
                 error: function (error) {
-                    getAllItems();
+                    getAllItemsToTable();
                     errorNotification(error.responseJSON.message);
                 }
             });
@@ -135,11 +135,11 @@
                 type: 'PUT',
                 data: $('#itemForm').serialize(),
                 success: function (response) {
-                    getAllItems();
+                    getAllItemsToTable();
                     successNotification(response.message);
                 },
                 error: function (error) {
-                    getAllItems();
+                    getAllItemsToTable();
                     errorNotification(error.responseJSON.message);
                 }
             });
@@ -154,12 +154,12 @@
                 type: 'DELETE',
                 data: {id: $("#txtItemCode").val()},
                 success: function (response) {
-                    getAllItems();
+                    getAllItemsToTable();
                     clearItemInputs();
                     successNotification(response.message);
                 },
                 error: function (error) {
-                    getAllItems();
+                    getAllItemsToTable();
                     errorNotification(error.responseJSON.message);
                 }
             });
@@ -167,15 +167,15 @@
 
         // Get All Items
         $('#btnGetAllItems').click(function () {
-            getAllItems();
+            getAllItemsToTable();
         });
 
         // Reset Items
         $('#btnResetItem').click(function () {
-            getAllItems();
+            getAllItemsToTable();
         });
 
-        function getAllItems() {
+        function getAllItemsToTable() {
             $.ajax({
                 url: '{{ route('get-all-items') }}',
                 type: 'GET',
