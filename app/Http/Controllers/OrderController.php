@@ -26,12 +26,12 @@ class OrderController extends Controller
             'orderDetailsList.*.total' => 'required|numeric',
         ]);
 
-        // Check if the OrderId already exists
+        // Check Order Id
         if (Order::where('orderId', $request->orderId)->exists()) {
             return response()->json(['message' => 'Duplicate Order Id: ' . $request->orderId], 400);
         }
 
-        // Find the Customer
+        // Check Customer Id
         $customer = Customer::find($request->customerId);
         if (!$customer) {
             return response()->json(['message' => 'Customer Not Found: ' . $request->customerId], 404);
