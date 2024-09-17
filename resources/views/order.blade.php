@@ -121,9 +121,6 @@
                 let number = parseInt(parts[1]) + 1;
                 let newOrderId = prefix + '-' + number.toString().padStart(3, '0');
                 $("#txtPlaceOrderOrderId").val(newOrderId);
-            },
-            error: function (error) {
-                console.log(error.responseJSON.message);
             }
         });
     }
@@ -146,7 +143,7 @@
                 );
 
                 // Add Customer ID
-                response.forEach(customer => {
+                response.data.forEach(customer => {
                     let option = $("<option></option>")
                         .attr("value", customer.id)
                         .text(customer.id);
@@ -194,7 +191,7 @@
                 );
 
                 // Add Item Code
-                response.forEach(item => {
+                response.data.forEach(item => {
                     let option = $("<option></option>")
                         .attr("value", item.code)
                         .text(item.code);
@@ -253,7 +250,7 @@
             });
         }
 
-        // Clear inputs
+        // Clear Inputs
         $("#txtPlaceOrderItemCode").val('');
         $("#txtPlaceOrderItemDescription").val('');
         $("#txtPlaceOrderItemUnitPrice").val('');
@@ -316,7 +313,6 @@
             success: function (response) {
                 cart = [];  // Clear cart after successful order
                 updateCartTable();
-                getOrderCount();
                 generateOrderId();
                 successNotification(response.message);
             },

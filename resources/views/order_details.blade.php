@@ -27,11 +27,11 @@
             $.ajax({
                 url: '{{ route('get-order-details') }}',
                 method: 'GET',
-                success: function (res) {
-                    const tableBody = $('#orderDetailsTable');
+                success: function (response) {
+                    let tableBody = $('#orderDetailsTable');
                     tableBody.empty();
 
-                    res.data.forEach(function (orderDetail) {
+                    response.data.forEach(function (orderDetail) {
                         orderDetail.orderDetailsList.forEach(function (detail) {
                             let row = `<tr>
                                     <td>${orderDetail.orderId}</td>
@@ -45,7 +45,9 @@
                     });
                 },
                 error: function (error) {
-                    console.log(error.responseJSON.message);
+                    $("#orderDetailsTable").empty();
+                    let errorRow = `<tr><td colspan="5" class="text-center text-danger">${error.responseJSON.message}</td></tr>`;
+                    $("#orderDetailsTable").append(errorRow);
                 }
             });
         }
