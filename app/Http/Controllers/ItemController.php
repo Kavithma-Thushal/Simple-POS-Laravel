@@ -33,12 +33,7 @@ class ItemController extends Controller
 
     public function searchItem(Request $request)
     {
-        // Validate the request
-        $validatedData = $request->validate([
-            'id' => 'required|string',
-        ]);
-
-        $item = Item::where('code', $validatedData['id'])->first();
+        $item = Item::where('code', $request['id'])->first();
         if ($item) {
             return response()->json(['data' => $item]);
         } else {
@@ -67,17 +62,12 @@ class ItemController extends Controller
 
     public function deleteItem(Request $request)
     {
-        // Validate the request
-        $validatedData = $request->validate([
-            'id' => 'required|string',
-        ]);
-
-        $item = Item::find($validatedData['id']);
+        $item = Item::find($request['id']);
         if ($item) {
             $item->delete();
             return response()->json(['message' => 'Item Deleted Successfully...!']);
         } else {
-            return response()->json(['message' => 'Item Not Found: ' . $validatedData['id']], 404);
+            return response()->json(['message' => 'Item Not Found: ' . $request['id']], 404);
         }
     }
 

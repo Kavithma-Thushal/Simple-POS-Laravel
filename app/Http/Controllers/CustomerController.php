@@ -33,12 +33,7 @@ class CustomerController extends Controller
 
     public function searchCustomer(Request $request)
     {
-        // Validate the request
-        $validatedData = $request->validate([
-            'id' => 'required|string',
-        ]);
-
-        $customer = Customer::where('id', $validatedData['id'])->first();
+        $customer = Customer::where('id', $request['id'])->first();
         if ($customer) {
             return response()->json(['data' => $customer]);
         } else {
@@ -67,17 +62,12 @@ class CustomerController extends Controller
 
     public function deleteCustomer(Request $request)
     {
-        // Validate the request
-        $validatedData = $request->validate([
-            'id' => 'required|string',
-        ]);
-
-        $customer = Customer::find($validatedData['id']);
+        $customer = Customer::find($request['id']);
         if ($customer) {
             $customer->delete();
             return response()->json(['message' => 'Customer Deleted Successfully...!']);
         } else {
-            return response()->json(['message' => 'Customer Not Found: ' . $validatedData['id']], 404);
+            return response()->json(['message' => 'Customer Not Found: ' . $request['id']], 404);
         }
     }
 
