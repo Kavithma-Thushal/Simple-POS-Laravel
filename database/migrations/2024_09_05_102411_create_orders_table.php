@@ -11,11 +11,8 @@ return new class extends Migration {
             $table->string('orderId')->primary();
             $table->string('customerId');
 
-            // Add foreign key constraint
-            $table->foreign('customerId')
-                ->references('id')
-                ->on('customers')
-                ->onDelete('cascade');
+            // Foreign key constraints
+            $table->foreign('customerId')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 
