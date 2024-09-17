@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Item;
 
@@ -14,13 +15,26 @@ class ItemController extends Controller
 
     public function saveItem(Request $request)
     {
-        $validatedData = $request->validate([
-            'code' => 'required|string',
-            'description' => 'required|string',
-            'unitPrice' => 'required|numeric',
-            'qtyOnHand' => 'required|integer',
-        ]);
+        $rules = [
+            'code' => ['required', 'regex:/^I\d{2}-\d{3}$/'],
+            'description' => ['required', 'regex:/^[A-Za-z\s\'-]{4,}$/'],
+            'unitPrice' => ['required', 'numeric', 'min:0'],
+            'qtyOnHand' => ['required', 'integer', 'min:0'],
+        ];
 
+        $messages = [
+            'code.regex' => 'Item Code format must be "I00-001", "I12-345"',
+            'description.regex' => 'Description must contain at least 4 letters',
+            'unitPrice.min' => 'Unit Price must be a positive value or zero',
+            'qtyOnHand.min' => 'Qty On Hand must be a positive value or zero',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 422);
+        }
+
+        $validatedData = $validator->validated();
         $item = Item::where('code', $validatedData['code'])->exists();
         if (!$item) {
             Item::create($validatedData);
@@ -42,13 +56,26 @@ class ItemController extends Controller
 
     public function updateItem(Request $request)
     {
-        $validatedData = $request->validate([
-            'code' => 'required|string',
-            'description' => 'required|string',
-            'unitPrice' => 'required|numeric',
-            'qtyOnHand' => 'required|integer',
-        ]);
+        $rules = [
+            'code' => ['required', 'regex:/^I\d{2}-\d{3}$/'],
+            'description' => ['required', 'regex:/^[A-Za-z\s\'-]{4,}$/'],
+            'unitPrice' => ['required', 'numeric', 'min:0'],
+            'qtyOnHand' => ['required', 'integer', 'min:0'],
+        ];
 
+        $messages = [
+            'code.regex' => 'Item Code format must be "I00-001", "I12-345"',
+            'description.regex' => 'Description must contain at least 4 letters',
+            'unitPrice.min' => 'Unit Price must be a positive value or zero',
+            'qtyOnHand.min' => 'Qty On Hand must be a positive value or zero',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 422);
+        }
+
+        $validatedData = $validator->validated();
         $item = Item::find($validatedData['code']);
         if ($item) {
             $item->update($validatedData);
