@@ -66,16 +66,17 @@
                     <input class="form-control" id="txtPlaceOrderBuyQty" type="number" min="1" required>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
-                    <button class="btn btn-outline-primary mx-2" id="btnAddToCart" type="button">Add to Cart
-                    </button>
+                    <button class="btn btn-outline-primary mx-2" id="btnAddToCart" type="button">Add to Cart</button>
                 </div>
                 <div class="mb-2">
                     <label for="txtPlaceOrderTotal" class="form-label fw-bold">Total</label>
                     <input class="form-control" id="txtPlaceOrderTotal" type="number" readonly>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
-                    <button class="btn btn-outline-success mx-2" id="btnPlaceOrder" type="button">Place Order
-                    </button>
+                    <button class="btn btn-outline-success mx-2" id="btnPlaceOrder" type="button">Place Order</button>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <button class="btn btn-outline-danger mx-2" id="btnCancelOrder" type="button">Cancel Order</button>
                 </div>
             </form>
         </div>
@@ -250,7 +251,13 @@
             });
         }
 
-        // Clear Inputs
+        // Disable Customer Combo
+        $("#txtPlaceOrderCustomerId").prop('disabled', true);
+        $("#txtPlaceOrderCustomerName").prop('disabled', true);
+        $("#txtPlaceOrderCustomerAddress").prop('disabled', true);
+        $("#txtPlaceOrderCustomerSalary").prop('disabled', true);
+
+        // Clear Item Inputs
         $("#txtPlaceOrderItemCode").val('');
         $("#txtPlaceOrderItemDescription").val('');
         $("#txtPlaceOrderItemUnitPrice").val('');
@@ -315,10 +322,48 @@
                 updateCartTable();
                 generateOrderId();
                 successNotification(response.message);
+
+                // Enable Customer Combo
+                $("#txtPlaceOrderCustomerId").prop('disabled', false);
+                $("#txtPlaceOrderCustomerName").prop('disabled', false);
+                $("#txtPlaceOrderCustomerAddress").prop('disabled', false);
+                $("#txtPlaceOrderCustomerSalary").prop('disabled', false);
+
+                // Clear Customer Inputs
+                $("#txtPlaceOrderCustomerId").val('');
+                $("#txtPlaceOrderCustomerName").val('');
+                $("#txtPlaceOrderCustomerAddress").val('');
+                $("#txtPlaceOrderCustomerSalary").val('');
+                $("#txtPlaceOrderTotal").val('');
             },
             error: function (error) {
                 errorNotification(error.responseJSON.message);
             }
         });
+    });
+
+    $("#btnCancelOrder").click(function () {
+        // Enable Customer Combo
+        $("#txtPlaceOrderCustomerId").prop('disabled', false);
+        $("#txtPlaceOrderCustomerName").prop('disabled', false);
+        $("#txtPlaceOrderCustomerAddress").prop('disabled', false);
+        $("#txtPlaceOrderCustomerSalary").prop('disabled', false);
+
+        // Clear Customer Inputs
+        $("#txtPlaceOrderCustomerId").val('');
+        $("#txtPlaceOrderCustomerName").val('');
+        $("#txtPlaceOrderCustomerAddress").val('');
+        $("#txtPlaceOrderCustomerSalary").val('');
+        $("#txtPlaceOrderTotal").val('');
+
+        // Clear Item Inputs
+        $("#txtPlaceOrderItemCode").val('');
+        $("#txtPlaceOrderItemDescription").val('');
+        $("#txtPlaceOrderItemUnitPrice").val('');
+        $("#txtPlaceOrderItemQtyOnHand").val('');
+        $("#txtPlaceOrderBuyQty").val('');
+
+        // Empty Table
+        $("#orderTable").empty();
     });
 </script>
