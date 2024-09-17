@@ -70,6 +70,7 @@
 <script src="{{ asset('assets/js/validation/ItemValidation.js') }}"></script>
 <script>
     $(document).ready(function () {
+        generateItemCode();
         getAllItems();
 
         // Save Item
@@ -110,13 +111,17 @@
                 </tr>`;
 
                     $("#itemTable").append(row);
+                    generateItemCode();
                     itemTableListener();
+                    clearItemInputs();
                 },
                 error: function (error) {
+                    generateItemCode();
+                    clearItemInputs();
+
                     $("#itemTable").empty();
                     let errorRow = `<tr><td colspan="4" class="text-center text-danger">${error.responseJSON.message}</td></tr>`;
                     $("#itemTable").append(errorRow);
-                    errorNotification(error.responseJSON.message);
                 }
             });
         });
@@ -150,6 +155,7 @@
                 data: {id: $("#txtItemCode").val()},
                 success: function (response) {
                     getAllItems();
+                    clearItemInputs();
                     successNotification(response.message);
                 },
                 error: function (error) {
@@ -176,18 +182,18 @@
                 success: function (response) {
                     $('#itemTable').empty();
 
-                    response.forEach(item => {
+                    response.data.forEach(item => {
                         let code = item.code;
                         let description = item.description;
                         let unitPrice = item.unitPrice;
                         let qtyOnHand = item.qtyOnHand;
 
                         let row = `<tr>
-                            <td>${code}</td>
-                            <td>${description}</td>
-                            <td>${unitPrice}</td>
-                            <td>${qtyOnHand}</td>
-                        </tr>`;
+                        <td>${code}</td>
+                        <td>${description}</td>
+                        <td>${unitPrice}</td>
+                        <td>${qtyOnHand}</td>
+                    </tr>`;
 
                         $("#itemTable").append(row);
                     });
@@ -198,7 +204,9 @@
                     clearItemInputs();
                 },
                 error: function (error) {
-                    console.log(error.responseJSON.message);
+                    $("#itemTable").empty();
+                    let errorRow = `<tr><td colspan="4" class="text-center text-danger">${error.responseJSON.message}</td></tr>`;
+                    $("#itemTable").append(errorRow);
                 }
             });
         }
@@ -209,14 +217,13 @@
                 method: "GET",
                 success: function (response) {
                     let lastItemCode = response.data;
+
+                    // Split and generate new code
                     let parts = lastItemCode.split('-');
                     let prefix = parts[0];
                     let number = parseInt(parts[1]) + 1;
                     let newItemCode = prefix + '-' + number.toString().padStart(3, '0');
                     $("#txtItemCode").val(newItemCode);
-                },
-                error: function (error) {
-                    console.log(error.responseJSON.message);
                 }
             });
         }
@@ -240,7 +247,6 @@
 
         function clearItemInputs() {
             $("#txtSearchItem").val("");
-            $("#txtItemCode").val("");
             $("#txtItemDescription").val("");
             $("#txtItemUnitPrice").val("");
             $("#txtItemQtyOnHand").val("");
