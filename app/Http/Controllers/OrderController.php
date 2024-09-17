@@ -84,18 +84,19 @@ class OrderController extends Controller
 
     public function generateOrderId()
     {
-        $lastCustomerId = Order::orderBy('orderId', 'desc')->value('orderId');
-
-        if (!$lastCustomerId) {
-            $lastCustomerId = "ORD-000";
+        $lastOrderId = Order::orderBy('orderId', 'desc')->value('orderId');
+        if (!$lastOrderId) {
+            $lastOrderId = "ORD-000";
         }
-
-        return response()->json(['data' => $lastCustomerId]);
+        return response()->json(
+            ['data' => $lastOrderId]
+        );
     }
 
     public function getOrderCount()
     {
-        $totalOrders = Order::count();
-        return response()->json(['data' => $totalOrders]);
+        return response()->json(
+            ['data' => Order::count()]
+        );
     }
 }
