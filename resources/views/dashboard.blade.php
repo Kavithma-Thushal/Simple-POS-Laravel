@@ -75,10 +75,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('assets/js/Notification.js') }}"></script>
 <script>
-    getCustomerCount();
-    getItemCount();
-    getOrderCount();
-
     let dashboard = $('#dashboardSection').html();
 
     function loadContent(route) {
@@ -119,6 +115,10 @@
         e.preventDefault();
         loadContent("{{ route('view-order-details') }}");
     });
+
+    getCustomerCount();
+    getItemCount();
+    getOrderCount();
 
     function getCustomerCount() {
         $.ajax({
