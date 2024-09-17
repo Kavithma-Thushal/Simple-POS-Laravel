@@ -30,7 +30,7 @@ class OrderController extends Controller
         if (Order::where('orderId', $request->orderId)->exists()) {
             return response()->json([
                 'message' => 'Duplicate Order Id: ' . $request->orderId
-            ], 409);
+            ], 400);
         }
 
         // Find the Customer
