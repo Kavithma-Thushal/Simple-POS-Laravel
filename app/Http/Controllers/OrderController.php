@@ -47,7 +47,7 @@ class OrderController extends Controller
         $order->customerId = $customer->id;
         $order->save();
 
-        // Prepare OrderDetails and Update Item Quantities
+        // Prepare OrderDetails and Update Item Qty
         foreach ($request->orderDetailsList as $orderDetail) {
             $item = Item::find($orderDetail['itemCode']);
             if (!$item) {
@@ -72,14 +72,14 @@ class OrderController extends Controller
             $orderDetailEntry->total = $item->unitPrice * $buyQty;
             $orderDetailEntry->save();
 
-            // Update Item Quantity
+            // Update Item Qty
             $item->qtyOnHand -= $buyQty;
             $item->save();
         }
 
         return response()->json([
             'message' => 'Order Placed Successfully...!'
-        ], 200);
+        ]);
     }
 
     public function generateOrderId()
