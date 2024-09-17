@@ -28,17 +28,13 @@ class OrderController extends Controller
 
         // Check if the OrderId already exists
         if (Order::where('orderId', $request->orderId)->exists()) {
-            return response()->json([
-                'message' => 'Duplicate Order Id: ' . $request->orderId
-            ], 400);
+            return response()->json(['message' => 'Duplicate Order Id: ' . $request->orderId], 400);
         }
 
         // Find the Customer
         $customer = Customer::find($request->customerId);
         if (!$customer) {
-            return response()->json([
-                'message' => 'Customer Not Found: ' . $request->customerId
-            ], 404);
+            return response()->json(['message' => 'Customer Not Found: ' . $request->customerId], 404);
         }
 
         // Create the Order
@@ -51,17 +47,13 @@ class OrderController extends Controller
         foreach ($request->orderDetailsList as $orderDetail) {
             $item = Item::find($orderDetail['itemCode']);
             if (!$item) {
-                return response()->json([
-                    'message' => 'Item Not Found: ' . $orderDetail['itemCode']
-                ], 404);
+                return response()->json(['message' => 'Item Not Found: ' . $orderDetail['itemCode']], 404);
             }
 
             // Convert buyQty to integer
             $buyQty = intval($orderDetail['buyQty']);
             if ($item->qtyOnHand < $buyQty) {
-                return response()->json([
-                    'message' => 'Not Enough Stock For Item: ' . $item->description
-                ], 400);
+                return response()->json(['message' => 'Not Enough Stock For Item: ' . $item->description], 400);
             }
 
             // Create OrderDetails
@@ -77,9 +69,7 @@ class OrderController extends Controller
             $item->save();
         }
 
-        return response()->json([
-            'message' => 'Order Placed Successfully...!'
-        ]);
+        return response()->json(['message' => 'Order Placed Successfully...!']);
     }
 
     public function generateOrderId()
@@ -88,15 +78,11 @@ class OrderController extends Controller
         if (!$lastOrderId) {
             $lastOrderId = "ORD-000";
         }
-        return response()->json(
-            ['data' => $lastOrderId]
-        );
+        return response()->json(['data' => $lastOrderId]);
     }
 
     public function getOrderCount()
     {
-        return response()->json(
-            ['data' => Order::count()]
-        );
+        return response()->json(['data' => Order::count()]);
     }
 }

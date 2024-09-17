@@ -25,14 +25,9 @@ class CustomerController extends Controller
         $customer = Customer::where('id', $validatedData['id'])->exists();
         if (!$customer) {
             Customer::create($validatedData);
-            return response()->json(
-                ['message' => 'Customer Saved Successfully...!']
-            );
+            return response()->json(['message' => 'Customer Saved Successfully...!']);
         } else {
-            return response()->json(
-                ['message' => 'Duplicate Customer Id: ' . $validatedData['id']],
-                400
-            );
+            return response()->json(['message' => 'Duplicate Customer Id: ' . $validatedData['id']], 400);
         }
     }
 
@@ -45,14 +40,9 @@ class CustomerController extends Controller
 
         $customer = Customer::where('id', $validatedData['id'])->first();
         if ($customer) {
-            return response()->json(
-                ['data' => $customer]
-            );
+            return response()->json(['data' => $customer]);
         } else {
-            return response()->json(
-                ['message' => 'Customer Not Found...!'],
-                404
-            );
+            return response()->json(['message' => 'Customer Not Found...!'], 404);
         }
     }
 
@@ -69,14 +59,9 @@ class CustomerController extends Controller
         $customer = Customer::find($validatedData['id']);
         if ($customer) {
             $customer->update($validatedData);
-            return response()->json(
-                ['message' => 'Customer Updated Successfully...!']
-            );
+            return response()->json(['message' => 'Customer Updated Successfully...!']);
         } else {
-            return response()->json(
-                ['message' => 'Customer Not Found: ' . $validatedData['id']],
-                404
-            );
+            return response()->json(['message' => 'Customer Not Found: ' . $validatedData['id']], 404);
         }
     }
 
@@ -90,14 +75,9 @@ class CustomerController extends Controller
         $customer = Customer::find($validatedData['id']);
         if ($customer) {
             $customer->delete();
-            return response()->json(
-                ['message' => 'Customer Deleted Successfully...!']
-            );
+            return response()->json(['message' => 'Customer Deleted Successfully...!']);
         } else {
-            return response()->json(
-                ['message' => 'Customer Not Found: ' . $validatedData['id']],
-                404
-            );
+            return response()->json(['message' => 'Customer Not Found: ' . $validatedData['id']], 404);
         }
     }
 
@@ -105,14 +85,9 @@ class CustomerController extends Controller
     {
         $customers = Customer::all();
         if ($customers->isNotEmpty()) {
-            return response()->json(
-                ['data' => $customers]
-            );
+            return response()->json(['data' => $customers]);
         } else {
-            return response()->json(
-                ['message' => 'No Customers Found...!'],
-                404
-            );
+            return response()->json(['message' => 'No Customers Found...!'], 404);
         }
     }
 
@@ -122,15 +97,11 @@ class CustomerController extends Controller
         if (!$lastCustomerId) {
             $lastCustomerId = "C00-000";
         }
-        return response()->json(
-            ['data' => $lastCustomerId]
-        );
+        return response()->json(['data' => $lastCustomerId]);
     }
 
     public function getCustomerCount()
     {
-        return response()->json(
-            ['data' => Customer::count()]
-        );
+        return response()->json(['data' => Customer::count()]);
     }
 }
