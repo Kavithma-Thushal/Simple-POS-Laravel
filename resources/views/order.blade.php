@@ -18,16 +18,15 @@
                 </div>
                 <div class="mb-2">
                     <label for="txtPlaceOrderCustomerName" class="form-label fw-bold">Customer Name</label>
-                    <input class="form-control" id="txtPlaceOrderCustomerName" type="text">
+                    <input class="form-control" id="txtPlaceOrderCustomerName" type="text" readonly>
                 </div>
                 <div class="mb-2">
-                    <label for="txtPlaceOrderCustomerAddress" class="form-label fw-bold">Customer
-                        Address</label>
-                    <input class="form-control" id="txtPlaceOrderCustomerAddress" type="text">
+                    <label for="txtPlaceOrderCustomerAddress" class="form-label fw-bold">Customer Address</label>
+                    <input class="form-control" id="txtPlaceOrderCustomerAddress" type="text" readonly>
                 </div>
                 <div class="mb-2">
                     <label for="txtPlaceOrderCustomerSalary" class="form-label fw-bold">Customer Salary</label>
-                    <input class="form-control" id="txtPlaceOrderCustomerSalary" type="text">
+                    <input class="form-control" id="txtPlaceOrderCustomerSalary" type="text" readonly>
                 </div>
             </form>
         </div>
@@ -42,17 +41,16 @@
                             onchange="getItemDetailsToInputs()"></select>
                 </div>
                 <div class="mb-2">
-                    <label for="txtPlaceOrderItemDescription" class="form-label fw-bold">Item
-                        Description</label>
-                    <input class="form-control" id="txtPlaceOrderItemDescription" type="text">
+                    <label for="txtPlaceOrderItemDescription" class="form-label fw-bold">Item Description</label>
+                    <input class="form-control" id="txtPlaceOrderItemDescription" type="text" readonly>
                 </div>
                 <div class="mb-2">
                     <label for="txtPlaceOrderItemUnitPrice" class="form-label fw-bold">Unit Price</label>
-                    <input class="form-control" id="txtPlaceOrderItemUnitPrice" type="text">
+                    <input class="form-control" id="txtPlaceOrderItemUnitPrice" type="text" readonly>
                 </div>
                 <div class="mb-2">
                     <label for="txtPlaceOrderItemQtyOnHand" class="form-label fw-bold">Qty On Hand</label>
-                    <input class="form-control" id="txtPlaceOrderItemQtyOnHand" type="text">
+                    <input class="form-control" id="txtPlaceOrderItemQtyOnHand" type="text" readonly>
                 </div>
             </form>
         </div>
@@ -232,7 +230,7 @@
         let total = buyQty * unitPrice;
 
         if (!itemCode || !itemDescription || isNaN(unitPrice) || isNaN(buyQty) || !customerId) {
-            alert("Please fill all item details correctly");
+            errorNotification("Please fill all item details correctly");
             return;
         }
 
@@ -253,9 +251,6 @@
 
         // Disable Customer Combo
         $("#txtPlaceOrderCustomerId").prop('disabled', true);
-        $("#txtPlaceOrderCustomerName").prop('disabled', true);
-        $("#txtPlaceOrderCustomerAddress").prop('disabled', true);
-        $("#txtPlaceOrderCustomerSalary").prop('disabled', true);
 
         // Clear Item Inputs
         $("#txtPlaceOrderItemCode").val('');
@@ -298,7 +293,7 @@
         let customerId = $("#txtPlaceOrderCustomerId").val();
 
         if (!orderId || !customerId || cart.length === 0) {
-            alert("Please fill all fields and add items to the cart");
+            errorNotification("Please fill all fields and add items to the cart");
             return;
         }
 
@@ -345,9 +340,6 @@
     $("#btnCancelOrder").click(function () {
         // Enable Customer Combo
         $("#txtPlaceOrderCustomerId").prop('disabled', false);
-        $("#txtPlaceOrderCustomerName").prop('disabled', false);
-        $("#txtPlaceOrderCustomerAddress").prop('disabled', false);
-        $("#txtPlaceOrderCustomerSalary").prop('disabled', false);
 
         // Clear Customer Inputs
         $("#txtPlaceOrderCustomerId").val('');
