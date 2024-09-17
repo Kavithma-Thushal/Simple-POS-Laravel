@@ -42,7 +42,7 @@ order processing, with both frontend and backend components.
 
 <img src="public/assets/images/ss/item_management.png">
 
-### Place Order
+### Order Management
 
 <img src="public/assets/images/ss/order_management.png">
 
