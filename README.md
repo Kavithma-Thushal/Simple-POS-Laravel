@@ -50,6 +50,10 @@ order processing, with both frontend and backend components.
 
 <img src="public/assets/images/ss/order_details.png">
 
+### Codes
+
+<img src="public/assets/images/ss/Codes.png">
+
 ## 📝 Version
 
 **1.0.0**
